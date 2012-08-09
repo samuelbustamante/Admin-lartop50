@@ -1,0 +1,374 @@
+!!! 5
+html(lang='es')
+  head
+    meta(charset='utf-8')
+    title Bootstrap, from Twitter
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+    style
+      body {
+      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      background: url("/images/bg.jpg") #F1F1F1 repeat !important;
+      }
+    //if lt IE 9
+      script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+  body
+    .container(style="display:none")
+      .row(style="padding-top:100px;")
+        .span4.offset4
+           .thumbnails
+             .thumbnail(style="background:#FFF;")
+               form(method="POST", action='/auth/login', style="margin:0")
+                 .modal-header
+                   h3 INGRESO
+                 .modal-body
+                   label USUARIO
+                   input(type="text", name="user").span3
+                   label CONTRASEÑA
+                   input(type="password", name="password").span3
+                 .modal-footer
+                   button#button-send-login(type="submit").btn.btn-primary INGRESAR
+
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='#') Lartop50
+          //
+            .nav-collapse
+              ul.nav
+                li.active
+                  a(href='#') Home
+                li
+                  a(href='#about') About
+                li
+                  a(href='#contact') Contact
+          //
+            .nav-collapse 
+    .container
+      .page-header
+        h3 Tus Proyectos
+          button#button-new-project.btn.btn-primary(style="float:right;") Crear Proyecto
+
+      table.table
+        thead
+          tr
+            th(colspan="2") Proyecto
+        tbody
+          tr
+            td Proyecto 1
+            td(style="text-align:right;")
+              a.btn.btn-danger
+               i.icon-pencil.icon-white
+              a.btn.btn-danger
+               i.icon-trash.icon-white
+
+      //
+         MODAL LOGIN 
+      button#button-login.btn.btn-primary Ingresar
+      #modal-form-login.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Ingresar
+        .modal-body
+          form#form-login.form-horizontal(method='POST', action='/api/auth/login')
+            fieldset
+              .control-group
+                label.control-label(for='email') Correo electrónico
+                .controls
+                  input.input-xlarge(type='text', placeholder='Correo electrónico', name='email')
+              .control-group
+                label.control-label(for='password') Contraseña
+                .controls
+                  input.input-xlarge(type='password', placeholder='Contraseña', name='password')
+        .modal-footer
+          button#button-send-login.btn.btn-primary.save Ingresar
+      //
+         MODAL REGISTER 
+      button#button-register.btn.btn-primary Registrarse
+      #modal-form-register.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Registrarse
+        .modal-body
+          form#form-register.form-horizontal(method='POST', action='/api/auth/register')
+            fieldset
+              .control-group
+                label.control-label(for='name') Nombre
+                .controls
+                  input(type='text', placeholder='Ingrese su nombre', name='name')
+              .control-group
+                label.control-label(for='organization') Organización
+                .controls
+                  input(type='text', placeholder='Ingrese su organización', name='organization')
+              .control-group
+                label.control-label(for='email') Correo electrónico
+                .controls
+                  input(type='text', placeholder='Ingrese su correo electrónico', name='email')
+              .control-group
+                label.control-label(for='password') Contraseña
+                .controls
+                  input(type='password', placeholder='Ingrese una contraseña', name='password')
+        .modal-footer
+          button#button-send-register.btn.btn-primary.save Registrarse
+      //
+         MODAL ACTIVATE 
+      button#button-activate.btn.btn-primary Activar Usuario
+      #modal-form-activate.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Activación de cuenta
+        .modal-body
+          form#form-activate.form-horizontal(method='GET', action='/auth/activate/')
+            fieldset
+              .control-group
+                label.control-label(for='key') Código
+                .controls
+                  input(type='text', placeholder='Ingrese el código de activación', name='key')
+        .modal-footer
+          button#button-send-activate.btn.btn-primary.save Activar
+      //
+         MODAL PROJECTS 
+      #modal-form-project.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Crear proyecto
+        .modal-body
+          form#form-project.form-horizontal(method='POST', action='/projects')
+            fieldset
+              .control-group
+                label.control-label(for='name') Nombre
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre del proyecto', name='name')
+              .control-group
+                label.control-label(for='acronym') Siglas
+                .controls
+                  input(type='text', placeholder='Ingrese las siglas del proyecto', name='acronym')
+              .control-group
+                label.control-label(for='segment') Segmento
+                .controls
+                  input(type='text', placeholder='Ingrese el segmento del proyecto', name='segment')
+              .control-group
+                label.control-label(for='description') Descripción
+                .controls
+                  textarea(placeholder='Ingrse una breve descripción del proyecto', name='description')
+              .control-group
+                label.control-label(for='url') Sitio web
+                .controls
+                  input(type='text', placeholder='Ingrese el sitio web del proyecto', name='url')
+              .control-group
+                label.control-label(for='contry') Pais
+                .controls
+                  select(name='country')
+                    option 1
+                    option 2
+              .control-group
+                label.control-label(for='state') Provincia
+                .controls
+                  select(name='state')
+                    option 1
+                    option 2
+              .control-group
+                label.control-label(for='city') Ciudad
+                .controls
+                  select(name='city')
+                    option 1
+                    option 2
+        .modal-footer
+          button#button-save-project.btn.btn-primary.save Crear
+      //
+         MODAL CLUSTER 
+      button#button-new-cluster.btn.btn-primary Crear Cluster
+      #modal-form-cluster.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Crear Cluster
+        .modal-body
+          form#form-cluster.form-horizontal(method='POST', action='/clusters')
+            fieldset
+              input(type='text', name='project', style='display: none;')
+              .control-group
+                label.control-label(for='name') Nombre
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre del cluster', name='name')
+              .control-group
+                label.control-label(for='status') Estado
+                .controls
+                  input(type='text', placeholder='Ingrese el estado del cluster', name='status')
+              .control-group
+                label.control-label(for='area') Area
+                .controls
+                  input(type='text', placeholder='Ingrese el area del cluster', name='area')
+              .control-group
+                label.control-label(for='description') Descripción
+                .controls
+                  textarea(placeholder='Ingrese una breve descripción', name='description')
+              .control-group
+                label.control-label(for='description') Vendedor
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre del vendedor', name='vendor')
+              .control-group
+                label.control-label(for='description') Fecha de inicio
+                .controls
+                  input(type='text', placeholder='Ingrese la fecha de inicio del cluster', name='initiation')
+        .modal-footer
+          button#button-save-cluster.btn.btn-primary.save Crear
+      //
+         MODAL COMPONENT 
+      button#button-new-component.btn.btn-primary Agregar Componente
+      #modal-form-component.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Agregar Componente
+        .modal-body
+          form#form-component.form-horizontal(method='POST', action='/components')
+            fieldset
+              input(type='text', name='cluster', style='display: none;')
+              .control-group
+                label.control-label(for='name') Nombre
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre', name='name')
+              .control-group
+                label.control-label(for='model') Modelo
+                .controls
+                  input(type='text', placeholder='Ingrese el modelo', name='model')
+              .control-group
+                label.control-label(for='vendor') Vendedor
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre del vendedor', name='vendor')
+              .control-group
+                label.control-label(for='nodes') Número de nodos
+                .controls
+                  input(type='text', placeholder='Ingrese el número de nodos', name='nodes')
+              .control-group
+                label.control-label(for='processor_name') Nombre del procesador
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre del procesador', name='processor_name')
+              .control-group
+                label.control-label(for='processor_name') Modelo del procesador
+                .controls
+                  input(type='text', placeholder='Ingrese el modelo del procesador', name='processor_model')
+              .control-group
+                label.control-label(for='processor_socket') Socket del procesador
+                .controls
+                  input(type='text', placeholder='Ingrese el socket del procesador', name='processor_socket')
+              .control-group
+                label.control-label(for='processor_cores') Nucléos del procesador
+                .controls
+                  input(type='text', placeholder='Ingrese el número de cores del procesador', name='processor_cores')
+              .control-group
+                label.control-label(for='processor_speed') Velocidad del procesador
+                .controls
+                  input(type='text', placeholder='Ingrese la velocidad de su procesador', name='processor_speed')
+              .control-group
+                label.control-label(for='accelerator_name') Nombre del acelerador
+                .controls
+                  input(type='text', placeholder='Ingrese el nombre de su acelerador', name='accelerator_name')
+              .control-group
+                label.control-label(for='accelerator_model') Modelo del acelerador
+                .controls
+                  input(type='text', placeholder='Ingrese el modelos de su acelerador', name='accelerator_model')
+              .control-group
+                label.control-label(for='accelerator_number') Número de aceleradores
+                .controls
+                  input(type='text', placeholder='Ingrese el número de aceleradores', name='accelerator_number')
+              .control-group
+                label.control-label(for='accelerator_cores') Número de aceleradores
+                .controls
+                  input(type='text', placeholder='Ingrese el número de aceleradores', name='accelerator_cores')
+              .control-group
+                label.control-label(for='accelerator_speed') Velocidad del acelerador
+                .controls
+                  input(type='text', placeholder='Ingrese la velocidad del acelerador', name='accelerator_speed')
+              .control-group
+                label.control-label(for='primary_operating_system') Sistema operativo
+                .controls
+                  input(type='text', placeholder='Ingrese el sistema operativo', name='primary_operating_system')
+              .control-group
+                label.control-label(for='primary_interconection') Interconexión
+                .controls
+                  input(type='text', placeholder='Ingrese la interconexión', name='primary_interconection')
+              .control-group
+                label.control-label(for='memory_node') Memoria (MB)
+                .controls
+                  input(type='text', placeholder='Ingrese la memoria', name='memory_node')
+        .modal-footer
+          button#button-save-component.btn.btn-primary.save Agregar
+      //
+         MODAL LINPACKS 
+      button#button-new-linpack.btn.btn-primary Ingresar Linpack
+      #modal-form-linpack.modal.fade(style='display: none;')
+        .modal-header
+          button.close(data-dismiss='modal') x
+          h3 Ingresar Linpack
+        .modal-body
+          form#form-linpack.form-horizontal(method='POST', action='/linpacks')
+            fieldset
+              input(type='text', name='cluster', style='display: none;')
+              .control-group
+                label.control-label(for='title') Título
+                .controls
+                  input(type='text', placeholder='Ingrese el título', name='title')
+              .control-group
+                label.control-label(for='benchmark_date') Fecha de benchmark
+                .controls
+                  input(type='text', placeholder='Ingrese la fecha de benchmark', name='benchmark_date')
+              .control-group
+                label.control-label(for='cores') Número de cores
+                .controls
+                  input(type='text', placeholder='Ingrese el número de cores usado', name='cores')
+              .control-group
+                label.control-label(for='gpu_cores') Número de GPU cores
+                .controls
+                  input(type='text', placeholder='Ingrese el número de GPU Cores usados', name='gpu_cores')
+              .control-group
+                label.control-label(for='rmax') Rmax
+                .controls
+                  input(type='text', placeholder='Ingrese su Rmax', name='rmax')
+              .control-group
+                label.control-label(for='description') Rpeak
+                .controls
+                  input(type='text', placeholder='Ingrese su Rpeak', name='rpeak')
+              .control-group
+                label.control-label(for='nmax') Nmax
+                .controls
+                  input(type='text', placeholder='Ingrese su Nmax', name='nmax')
+              .control-group
+                label.control-label(for='nhalf') Nhalf
+                .controls
+                  input(type='text', placeholder='Ingrse su Nhalf', name='nhalf')
+              .control-group
+                label.control-label(for='compiler_name') Nombre del copilador
+                .controls
+                  input(type='text', placeholder='Ingrse el compilado usado', name='compiler_name')
+              .control-group
+                label.control-label(for='compiler_options') Opciones del compilador
+                .controls
+                  input(type='text', placeholder='Ingrese las opciones usadas', name='compiler_options')
+              .control-group
+                label.control-label(for='math_library') Librería Math
+                .controls
+                  input(type='text', placeholder='Ingrese la librería math usada', name='math_library')
+              .control-group
+                label.control-label(for='mpi_library') Librería MPI
+                .controls
+                  input(type='text', placeholder='Ingrese la librería mpi usada', name='mpi_library')
+              .control-group
+                label.control-label(for='hpl_input') HPL de entrada
+                .controls
+                  textarea(placeholder='Ingrese el hpl de entrada', name='hpl_input')
+              .control-group
+                label.control-label(for='hpl_output') HPL de salida
+                .controls
+                  textarea(placeholder='Ingrese el hpl de salida', name='hpl_output')
+        .modal-footer
+          button#button-save-linpack.btn.btn-primary.save Ingresar
+
+    script(src='/javascripts/jquery.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/forms.js')

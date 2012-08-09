@@ -1,0 +1,84 @@
+!!! 5
+html(lang='es')
+  head
+    meta(charset='utf-8')
+    title Bootstrap, from Twitter
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+    style
+      body {
+      background:#DDD;
+      }
+    //if lt IE 9
+      script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+  body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='#') Lartop50
+
+    .container
+      .row(style="margin-top:80px")
+        .span7(style="height:300px;background-image:url(/images/computers.jpg);")
+        .span5
+          #login.well
+            h3 Iniciar sesión
+            form#form-login(method='POST', action='/api/auth/login')
+              .control-group#ctr-login-email
+                input.input-xlarge(type="text", name="email", placeholder="Correo electrónico")
+              .control-group#ctr-login-password
+                input.input-xlarge(type="password", name="password", placeholder="Contraseña")
+              button.btn.btn-primary.btn-large.input-xlarge(type="submit", data-loading-text="Iniciando sesión ...", autocomplete="off") Iniciar sesión
+          #register.well
+            h3 ¿Eres nuevo en Lartop50?
+            form#form-register(method='POST', action='/api/auth/register')
+              .control-group#ctl-register-name
+                input.input-xlarge(type="text", name="name", placeholder="Nombre completo")
+              .control-group#ctl-register-organization
+                input.input-xlarge(type="text", name="organization", placeholder="Organización")
+              .control-group#ctr-register-email
+                input.input-xlarge(type="text", name="email", placeholder="Correo electrónico")
+              .control-group#ctl-register-password
+                input.input-xlarge(type="password", name="password", placeholder="Contraseña")
+              button.btn.btn-success.btn-large.input-xlarge(type="submit", data-loading-text="Registrandote ...", autocomplete="off") Registrarse
+
+    style
+      #login,
+      #register {
+        text-align:center;
+        background:#FFF;
+      }
+
+      #login h3,
+      #register h3 {
+        padding-bottom:15px;
+      }
+
+      #register {
+        margin-top:15px;
+      }
+
+      #form-login,
+      #form-register {
+        margin:0;
+      }
+
+      #form-login .control-group,
+      #form-register .control-group {
+        margin-bottom:0;
+      }
+
+      #form-login button,
+      #form-register button {
+        margin:10px 0 5px 0;
+      }
+
+    script(src='/javascripts/jquery.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/forms.js')
