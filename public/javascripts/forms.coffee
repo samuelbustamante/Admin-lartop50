@@ -71,9 +71,14 @@ $(document).ready () ->
 				200: (data) -> # successful login
 				400: (xhr) ->  # invalid parameters
 					data = JSON.parse(xhr.responseText)
+					for error in data.errors
+						$("#ctrl-login-#{error.param}").addClass("warning")
 				404: (xhr) ->  # user and password not found
 					data = JSON.parse(xhr.responseText)
 				500: (xhr) ->  # internal error
+
+		$(this).find('button').button("reset")
+
 		false
 
 	#
@@ -90,10 +95,12 @@ $(document).ready () ->
 			type: $("#form-register").attr("method")
 			statusCode:
 				200: (data) -> # successful registration
+					$("#register").hide()
+					$("#activate").show()
 				400: (xhr) -> # invalid parameters
 					data = JSON.parse(xhr.responseText)
 					for error in data.errors
-						$("#ctl-register-#{error.param}").addClass("warning")
+						$("#ctrl-register-#{error.param}").addClass("warning")
 				410: (xhr) ->  # email is already in use
 					data = JSON.parse(xhr.responseText)
 				500: (xhr) -> # internal error
@@ -106,17 +113,30 @@ $(document).ready () ->
 	#	FORM ACTIVATE
 	#
 
-	$("#button-send-activate").click () ->
+	$("#form-activate").submit () ->
+
+		$(this).find("button").button("loading")
+
 		$.ajax
+			data: $("#form-activate").serialize()
+			url : $("#form-activate").attr("action")
 			type: $("#form-activate").attr("method")
-			url : $("#form-activate").attr("action") + $("#form-activate").find('input[name="key"]').val()
 			statusCode:
 				200: (data) -> # activation successful
 				400: (xhr) ->  # invalid key
 					data = JSON.parse(xhr.responseText)
+
+					$("#activate").find(".error-400").show()
+					$("#form-activate").each ->
+						this.reset()
+					for error in data.errors
+						$("#ctrl-activate-#{error.param}").addClass("warning")
 				404: (xhr) ->  # key not found
 					data = JSON.parse(xhr.responseText)
 				500: (xhr) ->  # internal error
+
+		$(this).find('button').button("reset")
+
 		false
 
 	#

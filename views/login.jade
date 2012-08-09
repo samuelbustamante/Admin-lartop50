@@ -9,7 +9,7 @@ html(lang='es')
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
     style
       body {
-      background:#DDD;
+        background:#DDD;
       }
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
@@ -25,58 +25,97 @@ html(lang='es')
 
     .container
       .row(style="margin-top:80px")
-        .span7(style="height:300px;background-image:url(/images/computers.jpg);")
+        .span7(style="height:300px;")
         .span5
           #login.well
             h3 Iniciar sesión
+            // ALERT SUCCESS ACTIVATE (CODE 200)
+            .alert.alert-info.code-200.hide
+              a.close(data-dismiss="alert", href="#") ×
+              h4.alert-heading ¡¡ Su cuenta fué activada !!
+              p Ahora puede iniciar sesión.
+            // FORM LOGIN
             form#form-login(method='POST', action='/api/auth/login')
-              .control-group#ctr-login-email
+              .control-group#ctrl-login-email
                 input.input-xlarge(type="text", name="email", placeholder="Correo electrónico")
-              .control-group#ctr-login-password
+              .control-group#ctrl-login-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
               button.btn.btn-primary.btn-large.input-xlarge(type="submit", data-loading-text="Iniciando sesión ...", autocomplete="off") Iniciar sesión
+
           #register.well
             h3 ¿Eres nuevo en Lartop50?
+            // ALERT ERROR (CODE 400)
+            .alert.alert-error.code-400.hide
+              a.close(data-dismiss="alert", href="#") ×
+              h4.alert-heading Los datos ingresados son incorrectos
+              p Por favor verifique los campos resaltados.
+            // FORM REGISTER
             form#form-register(method='POST', action='/api/auth/register')
-              .control-group#ctl-register-name
+              .control-group#ctrl-register-name
                 input.input-xlarge(type="text", name="name", placeholder="Nombre completo")
-              .control-group#ctl-register-organization
+              .control-group#ctrl-register-organization
                 input.input-xlarge(type="text", name="organization", placeholder="Organización")
-              .control-group#ctr-register-email
+              .control-group#ctrl-register-email
                 input.input-xlarge(type="text", name="email", placeholder="Correo electrónico")
-              .control-group#ctl-register-password
+              .control-group#ctrl-register-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
               button.btn.btn-success.btn-large.input-xlarge(type="submit", data-loading-text="Registrandote ...", autocomplete="off") Registrarse
 
+          #activate.well
+            h3 ¡¡ Activá tu cuenta !!
+            // ALERT ERROR (CODE 400)
+            .alert.alert-error.code-400.hide
+              a.close(data-dismiss="alert", href="#") ×
+              h4.alert-heading El código ingresado es incorrecto
+              p Por favor ingrese su código nuevamente.
+            // ALERT REGISTER SUCCESS (CODE 200)
+            .alert.alert-success.code-200.hide
+              a.close(data-dismiss="alert", href="#") ×
+              h4.alert-heading ¡¡ Muchas gracias por registrarte !!
+              p recibirás un correo electrónico con un código de validación, ingrésalo a continuación:
+            // FORM ACTIVATE
+            form#form-activate(method='POST', action='/api/auth/activate')
+              .control-group#ctrl-activate-key
+                input.input-xlarge(type="text", name="key", placeholder="Código de validación")
+              button.btn.btn-success.btn-large.input-xlarge(type="submit", data-loading-text="Activando cuenta ...", autocomplete="off") Activar cuenta
+
+
     style
       #login,
-      #register {
-        text-align:center;
-        background:#FFF;
+      #register,
+      #activate {
+        text-align: center;
+        background: #FFF;
       }
 
       #login h3,
-      #register h3 {
-        padding-bottom:15px;
+      #register h3,
+      #activate h3 {
+        padding-bottom: 15px;
       }
 
-      #register {
-        margin-top:15px;
+      #register,
+      #activate {
+        margin-top: 15px;
       }
 
       #form-login,
       #form-register {
-        margin:0;
+        margin: 0;
       }
 
       #form-login .control-group,
       #form-register .control-group {
-        margin-bottom:0;
+        margin-bottom: 0;
       }
 
       #form-login button,
       #form-register button {
-        margin:10px 0 5px 0;
+        margin: 10px 0 5px 0;
+      }
+
+      .alert p {
+         margin-top: 9px;
       }
 
     script(src='/javascripts/jquery.js')

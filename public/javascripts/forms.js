@@ -55,8 +55,15 @@
         statusCode: {
           200: function(data) {},
           400: function(xhr) {
-            var data;
-            return data = JSON.parse(xhr.responseText);
+            var data, error, _i, _len, _ref, _results;
+            data = JSON.parse(xhr.responseText);
+            _ref = data.errors;
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              error = _ref[_i];
+              _results.push($("#ctrl-login-" + error.param).addClass("warning"));
+            }
+            return _results;
           },
           404: function(xhr) {
             var data;
@@ -65,6 +72,7 @@
           500: function(xhr) {}
         }
       });
+      $(this).find('button').button("reset");
       return false;
     });
     $("#form-register").submit(function() {
@@ -74,7 +82,10 @@
         url: $("#form-register").attr("action"),
         type: $("#form-register").attr("method"),
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            $("#register").hide();
+            return $("#activate").show();
+          },
           400: function(xhr) {
             var data, error, _i, _len, _ref, _results;
             data = JSON.parse(xhr.responseText);
@@ -82,7 +93,7 @@
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
-              _results.push($("#ctl-register-" + error.param).addClass("warning"));
+              _results.push($("#ctrl-register-" + error.param).addClass("warning"));
             }
             return _results;
           },
@@ -96,15 +107,28 @@
       $(this).find('button').button("reset");
       return false;
     });
-    $("#button-send-activate").click(function() {
+    $("#form-activate").submit(function() {
+      $(this).find("button").button("loading");
       $.ajax({
+        data: $("#form-activate").serialize(),
+        url: $("#form-activate").attr("action"),
         type: $("#form-activate").attr("method"),
-        url: $("#form-activate").attr("action") + $("#form-activate").find('input[name="key"]').val(),
         statusCode: {
           200: function(data) {},
           400: function(xhr) {
-            var data;
-            return data = JSON.parse(xhr.responseText);
+            var data, error, _i, _len, _ref, _results;
+            data = JSON.parse(xhr.responseText);
+            $("#activate").find(".error-400").show();
+            $("#form-activate").each(function() {
+              return this.reset();
+            });
+            _ref = data.errors;
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              error = _ref[_i];
+              _results.push($("#ctrl-activate-" + error.param).addClass("warning"));
+            }
+            return _results;
           },
           404: function(xhr) {
             var data;
@@ -113,6 +137,7 @@
           500: function(xhr) {}
         }
       });
+      $(this).find('button').button("reset");
       return false;
     });
     $("#button-save-project").click(function() {
