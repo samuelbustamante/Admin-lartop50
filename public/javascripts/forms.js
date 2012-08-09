@@ -44,8 +44,26 @@
     $("#button-new-component").click(function() {
       return $("#modal-form-component").modal("show");
     });
-    $('#form-login').find('button').button();
-    $('#form-register').find('button').button();
+    $("#form-login").find("button").button();
+    $("#form-register").find("button").button();
+    $(".open-login").click(function() {
+      var id;
+      id = $(this).attr("now");
+      $(id).hide();
+      return $("#login").show();
+    });
+    $(".open-register").click(function() {
+      var id;
+      id = $(this).attr("now");
+      $(id).hide();
+      return $("#register").show();
+    });
+    $(".open-activate").click(function() {
+      var id;
+      id = $(this).attr("now");
+      $(id).hide();
+      return $("#activate").show();
+    });
     $("#form-login").submit(function() {
       $(this).find('button').button('loading');
       $.ajax({
@@ -57,6 +75,7 @@
           400: function(xhr) {
             var data, error, _i, _len, _ref, _results;
             data = JSON.parse(xhr.responseText);
+            $("#login").find(".code-400").show();
             _ref = data.errors;
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -84,11 +103,13 @@
         statusCode: {
           200: function(data) {
             $("#register").hide();
-            return $("#activate").show();
+            $("#activate").show();
+            return $("#activate").find(".code-200").show();
           },
           400: function(xhr) {
             var data, error, _i, _len, _ref, _results;
             data = JSON.parse(xhr.responseText);
+            $("#register").find(".code-400").show();
             _ref = data.errors;
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -114,11 +135,15 @@
         url: $("#form-activate").attr("action"),
         type: $("#form-activate").attr("method"),
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            $("#activate").hide();
+            $("#login").show();
+            return $("#login").find(".code-200").show();
+          },
           400: function(xhr) {
             var data, error, _i, _len, _ref, _results;
             data = JSON.parse(xhr.responseText);
-            $("#activate").find(".error-400").show();
+            $("#activate").find(".code-400").show();
             $("#form-activate").each(function() {
               return this.reset();
             });

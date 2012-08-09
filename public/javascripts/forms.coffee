@@ -52,9 +52,28 @@ $(document).ready () ->
 	# BUTTONS
 	#
 
-	$('#form-login').find('button').button()
+	$("#form-login").find("button").button()
 
-	$('#form-register').find('button').button()
+	$("#form-register").find("button").button()
+
+	#
+	# OPENS
+	#
+
+	$(".open-login").click ->
+		id = $(this).attr("now")
+		$(id).hide()
+		$("#login").show()
+
+	$(".open-register").click ->
+		id = $(this).attr("now")
+		$(id).hide()
+		$("#register").show()
+
+	$(".open-activate").click ->
+		id = $(this).attr("now")
+		$(id).hide()
+		$("#activate").show()
 
 	#
 	# FORM LOGIN
@@ -71,6 +90,9 @@ $(document).ready () ->
 				200: (data) -> # successful login
 				400: (xhr) ->  # invalid parameters
 					data = JSON.parse(xhr.responseText)
+
+					$("#login").find(".code-400").show()
+
 					for error in data.errors
 						$("#ctrl-login-#{error.param}").addClass("warning")
 				404: (xhr) ->  # user and password not found
@@ -97,8 +119,12 @@ $(document).ready () ->
 				200: (data) -> # successful registration
 					$("#register").hide()
 					$("#activate").show()
+					$("#activate").find(".code-200").show()
 				400: (xhr) -> # invalid parameters
 					data = JSON.parse(xhr.responseText)
+
+					$("#register").find(".code-400").show()
+
 					for error in data.errors
 						$("#ctrl-register-#{error.param}").addClass("warning")
 				410: (xhr) ->  # email is already in use
@@ -123,10 +149,12 @@ $(document).ready () ->
 			type: $("#form-activate").attr("method")
 			statusCode:
 				200: (data) -> # activation successful
+					$("#activate").hide()
+					$("#login").show()
+					$("#login").find(".code-200").show()
 				400: (xhr) ->  # invalid key
 					data = JSON.parse(xhr.responseText)
-
-					$("#activate").find(".error-400").show()
+					$("#activate").find(".code-400").show()
 					$("#form-activate").each ->
 						this.reset()
 					for error in data.errors
