@@ -71,27 +71,30 @@
         url: $("#form-login").attr("action"),
         type: $("#form-login").attr("method"),
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            return $("#form-login").find('button').button("reset");
+          },
           400: function(xhr) {
-            var data, error, _i, _len, _ref, _results;
+            var data, error, _i, _len, _ref;
             data = JSON.parse(xhr.responseText);
             $("#login").find(".code-400").show();
             _ref = data.errors;
-            _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
-              _results.push($("#ctrl-login-" + error.param).addClass("warning"));
+              $("#ctrl-login-" + error.param).addClass("warning");
             }
-            return _results;
+            return $("#form-login").find('button').button("reset");
           },
           404: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return $("#form-login").find('button').button("reset");
           },
-          500: function(xhr) {}
+          500: function(xhr) {
+            return $("#form-login").find('button').button("reset");
+          }
         }
       });
-      $(this).find('button').button("reset");
       return false;
     });
     $("#form-register").submit(function() {
@@ -103,6 +106,7 @@
         statusCode: {
           200: function(data) {
             $("#register").hide();
+            $(".opens").hide();
             $("#activate").show();
             return $("#activate").find(".code-200").show();
           },
@@ -137,6 +141,10 @@
         statusCode: {
           200: function(data) {
             $("#activate").hide();
+            $("#activate").find(".alert").hide();
+            $("#form-activate").each(function() {
+              return this.reset();
+            });
             $("#login").show();
             return $("#login").find(".code-200").show();
           },

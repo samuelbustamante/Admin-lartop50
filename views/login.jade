@@ -2,7 +2,7 @@
 html(lang='es')
   head
     meta(charset='utf-8')
-    title Bootstrap, from Twitter
+    title Lartop50 - Ingreso
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content='')
     meta(name='author', content='')
@@ -46,9 +46,10 @@ html(lang='es')
               .control-group#ctrl-login-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
               button.btn.btn-primary.btn-large.input-xlarge(type="submit", data-loading-text="Iniciando sesión ...", autocomplete="off") Iniciar sesión
-            a(href="javascript:;", style="margin-right: 10px", now="#login").open-register Registrarse
-            |
-            a(href="javascript:;", style="margin-left: 10px", now="#login").open-activate Activar cuenta
+            p.opens
+              a(href="javascript:;", style="margin-right: 10px", now="#login").open-register Registrarse
+              |
+              a(href="javascript:;", style="margin-left: 10px", now="#login").open-activate Activar cuenta
 
           #register.well.hide
             h3 Registrarse
@@ -68,9 +69,10 @@ html(lang='es')
               .control-group#ctrl-register-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
               button.btn.btn-success.btn-large.input-xlarge(type="submit", data-loading-text="Registrandote ...", autocomplete="off") Registrarse
-            a(href="javascript:;", style="margin-right: 10px", now="#register").open-login Iniciar sesión
-            |
-            a(href="javascript:;", style="margin-left: 10px", now="#register").open-activate Activar cuenta
+            p.opens
+              a(href="javascript:;", style="margin-right: 10px", now="#register").open-login Iniciar sesión
+              |
+              a(href="javascript:;", style="margin-left: 10px", now="#register").open-activate Activar cuenta
 
           #activate.well.hide
             h3 Activar cuenta
@@ -89,9 +91,10 @@ html(lang='es')
               .control-group#ctrl-activate-key
                 input.input-xlarge(type="text", name="key", placeholder="Código de activación")
               button.btn.btn-info.btn-large.input-xlarge(type="submit", data-loading-text="Activando cuenta ...", autocomplete="off") Activar cuenta
-            a(href="javascript:;", style="margin-right: 10px", now="#activate").open-register Registrarse
-            |
-            a(href="javascript:;", style="margin-left: 10px", now="#activate").open-login Iniciar sesión
+            p.opens
+              a(href="javascript:;", style="margin-right: 10px", now="#activate").open-register Registrarse
+              |
+              a(href="javascript:;", style="margin-left: 10px", now="#activate").open-login Iniciar sesión
 
     style
       #login,
@@ -122,11 +125,15 @@ html(lang='es')
       #form-login button,
       #form-register button,
       #form-activate button {
-        margin: 10px 0 19px 0;
+        margin: 10px 0 5px 0;
+      }
+
+      .opens {
+        margin-top:14px;
       }
 
       .alert p {
-         margin-top: 9px;
+        margin-top: 9px;
       }
 
     script(src='/javascripts/jquery.js')

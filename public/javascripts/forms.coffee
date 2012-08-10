@@ -88,6 +88,9 @@ $(document).ready () ->
 			type: $("#form-login").attr("method")
 			statusCode:
 				200: (data) -> # successful login
+					# RESET BUTTON
+					$("#form-login").find('button').button("reset")
+
 				400: (xhr) ->  # invalid parameters
 					data = JSON.parse(xhr.responseText)
 
@@ -95,11 +98,18 @@ $(document).ready () ->
 
 					for error in data.errors
 						$("#ctrl-login-#{error.param}").addClass("warning")
+
+					# RESET BUTTON
+					$("#form-login").find('button').button("reset")
+
 				404: (xhr) ->  # user and password not found
 					data = JSON.parse(xhr.responseText)
-				500: (xhr) ->  # internal error
+					# RESET BUTTON
+					$("#form-login").find('button').button("reset")
 
-		$(this).find('button').button("reset")
+				500: (xhr) ->  # internal error
+					# RESET BUTTON
+					$("#form-login").find('button').button("reset")
 
 		false
 
@@ -118,6 +128,7 @@ $(document).ready () ->
 			statusCode:
 				200: (data) -> # successful registration
 					$("#register").hide()
+					$(".opens").hide()
 					$("#activate").show()
 					$("#activate").find(".code-200").show()
 				400: (xhr) -> # invalid parameters
@@ -150,6 +161,8 @@ $(document).ready () ->
 			statusCode:
 				200: (data) -> # activation successful
 					$("#activate").hide()
+					$("#activate").find(".alert").hide()
+					$("#form-activate").each -> this.reset()
 					$("#login").show()
 					$("#login").find(".code-200").show()
 				400: (xhr) ->  # invalid key
