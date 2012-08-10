@@ -88,8 +88,8 @@ $(document).ready () ->
 			type: $("#form-login").attr("method")
 			statusCode:
 				200: (data) -> # successful login
-					# RESET BUTTON
-					$("#form-login").find('button').button("reset")
+					# REDIRECT
+					$(location).attr("href", "/")
 
 				400: (xhr) ->  # invalid parameters
 					data = JSON.parse(xhr.responseText)
@@ -161,9 +161,8 @@ $(document).ready () ->
 			statusCode:
 				200: (data) -> # activation successful
 					$("#activate").hide()
-					$("#activate").find(".alert").hide()
-					$("#form-activate").each -> this.reset()
 					$("#login").show()
+					$("#login").find(".opens").hide()
 					$("#login").find(".code-200").show()
 				400: (xhr) ->  # invalid key
 					data = JSON.parse(xhr.responseText)

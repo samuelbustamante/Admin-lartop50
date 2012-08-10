@@ -72,7 +72,7 @@
         type: $("#form-login").attr("method"),
         statusCode: {
           200: function(data) {
-            return $("#form-login").find('button').button("reset");
+            return $(location).attr("href", "/");
           },
           400: function(xhr) {
             var data, error, _i, _len, _ref;
@@ -141,11 +141,8 @@
         statusCode: {
           200: function(data) {
             $("#activate").hide();
-            $("#activate").find(".alert").hide();
-            $("#form-activate").each(function() {
-              return this.reset();
-            });
             $("#login").show();
+            $("#login").find(".opens").hide();
             return $("#login").find(".code-200").show();
           },
           400: function(xhr) {

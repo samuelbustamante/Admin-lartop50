@@ -9,7 +9,7 @@ html(lang='es')
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
     style
       body {
-        background:#DDD;
+        background: #DDD;
       }
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
@@ -28,7 +28,8 @@ html(lang='es')
         // .span7(style="height:300px;") REVIEW !!
         .span6.offset3
           #login.well
-            h3 Iniciar sesión
+            .page-header
+              h3 Iniciar sesión
             // ALERT SUCCESS ACTIVATE (CODE 200)
             .alert.alert-success.code-200.hide
               a.close(data-dismiss="alert", href="#") ×
@@ -52,7 +53,8 @@ html(lang='es')
               a(href="javascript:;", style="margin-left: 10px", now="#login").open-activate Activar cuenta
 
           #register.well.hide
-            h3 Registrarse
+            .page-header
+              h3 Registrarse
             // ALERT ERROR (CODE 400)
             .alert.alert-error.code-400.hide
               a.close(data-dismiss="alert", href="#") ×
@@ -75,7 +77,8 @@ html(lang='es')
               a(href="javascript:;", style="margin-left: 10px", now="#register").open-activate Activar cuenta
 
           #activate.well.hide
-            h3 Activar cuenta
+            .page-header
+              h3 Activar cuenta
             // ALERT ERROR (CODE 400)
             .alert.alert-error.code-400.hide
               a.close(data-dismiss="alert", href="#") ×
@@ -104,16 +107,30 @@ html(lang='es')
         background: #FFF;
       }
 
+      #login .page-header,
+      #register .page-header,
+      #activate .page-header {
+        padding: 0;
+        margin: 0 0 15px 0;
+      }
+
       #login h3,
       #register h3,
       #activate h3 {
         padding-bottom: 15px;
       }
 
+      #login .alert,
+      #register .alert,
+      #activate .alert {
+        margin-bottom: 5px;
+      }
+
       #form-login,
       #form-register,
       #form-activate {
         margin: 0;
+        padding-top: 10px;
       }
 
       #form-login .control-group,
