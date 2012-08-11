@@ -46,6 +46,7 @@
     });
     $("#form-login").find("button").button();
     $("#form-register").find("button").button();
+    $("#form-activate").find("button").button();
     $(".open-login").click(function() {
       var id;
       id = $(this).attr("now");
@@ -108,28 +109,30 @@
             $("#register").hide();
             $(".opens").hide();
             $("#activate").show();
-            return $("#activate").find(".code-200").show();
+            $("#activate").find(".code-200").show();
+            return $(this).find('button').button("reset");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref, _results;
+            var data, error, _i, _len, _ref;
             data = JSON.parse(xhr.responseText);
             $("#register").find(".code-400").show();
             _ref = data.errors;
-            _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
-              _results.push($("#ctrl-register-" + error.param).addClass("warning"));
+              $("#ctrl-register-" + error.param).addClass("warning");
             }
-            return _results;
+            return $(this).find('button').button("reset");
           },
           410: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return $(this).find('button').button("reset");
           },
-          500: function(xhr) {}
+          500: function(xhr) {
+            return $(this).find('button').button("reset");
+          }
         }
       });
-      $(this).find('button').button("reset");
       return false;
     });
     $("#form-activate").submit(function() {
@@ -143,31 +146,33 @@
             $("#activate").hide();
             $("#login").show();
             $("#login").find(".opens").hide();
-            return $("#login").find(".code-200").show();
+            $("#login").find(".code-200").show();
+            return $(this).find('button').button("reset");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref, _results;
+            var data, error, _i, _len, _ref;
             data = JSON.parse(xhr.responseText);
             $("#activate").find(".code-400").show();
             $("#form-activate").each(function() {
               return this.reset();
             });
             _ref = data.errors;
-            _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
-              _results.push($("#ctrl-activate-" + error.param).addClass("warning"));
+              $("#ctrl-activate-" + error.param).addClass("warning");
             }
-            return _results;
+            return $(this).find('button').button("reset");
           },
           404: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return $(this).find('button').button("reset");
           },
-          500: function(xhr) {}
+          500: function(xhr) {
+            return $(this).find('button').button("reset");
+          }
         }
       });
-      $(this).find('button').button("reset");
       return false;
     });
     $("#button-save-project").click(function() {
