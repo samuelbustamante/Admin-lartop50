@@ -9,13 +9,14 @@ html(lang='es')
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
     style
       body {
-        background: #DDD;
+        background-image:url(/images/bg_body.jpg);
+        background-repeat:repeat;
       }
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
   body
     .navbar.navbar-fixed-top
-      .navbar-inner
+      .navbar-inner(style='background: url("/images/bg_nav.jpg") repeat scroll 0 0 transparent; border-bottom: 1px solid #000000;box-shadow: 0 0 5px #000000;')
         .container
           a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
             span.icon-bar
