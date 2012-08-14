@@ -91,6 +91,7 @@ $(document).ready ->
 						"""
 					$("#tbody-center").append(tr)
 					$("#modal-form-center").modal("hide")
+					$("#table-center").show()
 					$("#form-center").each ->
 						this.reset()
 					button.button("reset")
