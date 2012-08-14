@@ -15,7 +15,7 @@ html(lang='es')
       }
       #panel {
         background: #FFF;
-        padding: 60px 45px;
+        padding: 60px 45px 25px 45px;
       }
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
@@ -28,16 +28,19 @@ html(lang='es')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href='#') Lartop50
-          //
-            .nav-collapse
-              ul.nav
-                li.active
-                  a(href='#') Home
-                li
-                  a(href='#about') About
-                li
-                  a(href='#contact') Contact
+          a.brand(href='/', style="color:#EEE") Lartop
+            span(style="color: #FDCA01") 50
+          .nav-collapse
+            ul.nav.pull-right
+              li.dropdown
+                a.dropdown-toggle(href="javascript:;", data-toggle="dropdown") #{profile.name} 
+                  b.caret
+                ul.dropdown-menu
+                  li
+                    a(href="javascript:;") Perfil
+                  li.divider
+                  li
+                    a(href="javascript:;") Salir
 
     #panel.container
       include includes/sites
@@ -66,3 +69,4 @@ html(lang='es')
     script(src='/javascripts/jquery.js')
     script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/forms.js')
+    script(src='/javascripts/panel.js')

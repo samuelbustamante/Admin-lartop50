@@ -1,47 +1,70 @@
-#modal-form-project.modal.fade.hide
+#modal-form-center.modal.fade.hide
   .modal-header
     button.close(data-dismiss='modal') x
     h3 Crear centro
   .modal-body
-    form#form-project.form-horizontal(method='POST', action='/projects')
+    form#form-center.form-horizontal(method='POST', action='/api/submission/centers')
       fieldset
+
         .control-group
           label.control-label(for='name') Nombre
           .controls
             input(type='text', placeholder='Ingrese el nombre del proyecto', name='name')
+
         .control-group
           label.control-label(for='acronym') Siglas
           .controls
             input(type='text', placeholder='Ingrese las siglas del proyecto', name='acronym')
+
         .control-group
           label.control-label(for='segment') Segmento
           .controls
-            input(type='text', placeholder='Ingrese el segmento del proyecto', name='segment')
-        .control-group
-          label.control-label(for='description') Descripción
-          .controls
-            textarea(placeholder='Ingrse una breve descripción del proyecto', name='description')
-        .control-group
-          label.control-label(for='url') Sitio web
-          .controls
-            input(type='text', placeholder='Ingrese el sitio web del proyecto', name='url')
+            select(name='segment')
+              option(value="Académico") Académico
+              option(value="Investigación") Investigación
+              option(value="Gubernamental") Gubernamental
+              option(value="Industrial") Industrial
+              option(value="Otro") Otro
+
         .control-group
           label.control-label(for='contry') Pais
           .controls
             select(name='country')
-              option 1
-              option 2
-        .control-group
-          label.control-label(for='state') Provincia
-          .controls
-            select(name='state')
-              option 1
-              option 2
+              option Argentina
+              option Bolivia
+              option Brasil
+              option Chile
+              option Colombia
+              option Costa Rica
+              option Cuba
+              option Ecuador
+              option El Salvador
+              option Guatemala
+              option Honduras
+              option México
+              option Nicaragua
+              option Panamá
+              option Paraguay
+              option Perú
+              option Puerto Rico
+              option República Dominicana
+              option Uruguay
+              option Venezuela
+
         .control-group
           label.control-label(for='city') Ciudad
           .controls
-            select(name='city')
-              option 1
-              option 2
+            input(type='text', placeholder='Ingrese la ciudad del centro', name='city')
+
+        .control-group
+          label.control-label(for='url') Sitio web
+          .controls
+            input(type='text', placeholder='Ingrese el sitio web del proyecto', name='url')
+
+        .control-group
+          label.control-label(for='description') Descripción
+          .controls
+            textarea(placeholder='Ingrse una breve descripción del proyecto', name='description', rows="4")
+
    .modal-footer
-     button#button-save-project.btn.btn-primary.save Crear
+     button#button-save-center.btn.btn-primary.save(data-loading-text="Creando ...", autocomplete="off") Crear

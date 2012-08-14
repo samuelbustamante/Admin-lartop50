@@ -1,44 +1,57 @@
 .container#sites
   .page-header
     h3 Mis centros
-      button#button-new-project.btn.btn-primary.pull-right
+      button#button-new-center.btn.btn-primary.pull-right
         i.icon-plus.icon-white
         span  Crear centro
 
+  if !(centers)
+    .alert.alert-info
+      a.close(data-dismiss="alert", href="#") ×
+      h4.alert-heading ¡¡ Bienvenido a Lartop50 !!
+      p Ahora puede empezar a ingresar sus centros y participar, bla, bla.
 
-  .alert.alert-info.code-200
-    a.close(data-dismiss="alert", href="#") ×
-    h4.alert-heading ¡¡ Bienvenido a Lartop50 !!
-    p Ahora puede iniciar empezar a ingresar sus centros y participar, bla, bla.
+    table.table.table-bordered.hide#table-center
+      thead
+        tr
+          th Nombre
+          th Siglas
+          th Segmento
+          th Pais
+          th Ciudad
+          th Acciones
+      tbody#tbody-center
 
-  table.table.table-bordered
-    thead
-      tr
-        th Centro
-        th Pais
-        th Organización
-        th Segmento
-        th Equipos
-        th Acciones
-    tbody
-      tr
-        td
-          a(href="javascript:;") Lidic
-        td Argentina
-        td Universidad Nacional de San Luis
-        td Educativo
-        td
-          span.badge.badge-info 3
-        td
-          .btn-group
-            button.btn.btn-mini.dropdown-toggle(data-toggle="dropdown")
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href="#")
-                  i.icon-pencil
-                  span  Editar
-              li
-                a(href="#")
-                  i.icon-remove
-                  span  Eliminar
+  else
+    table.table.table-bordered#table-center
+      thead
+        tr
+          th Nombre
+          th Siglas
+          th Segmento
+          th Pais
+          th Ciudad
+          th Acciones
+      tbody#tbody-center
+        for center in centers
+          tr
+            td
+              a(href="javascript:;") #{center.name}
+            td #{center.acronym}
+            td
+              span.badge.badge-info #{center.segment}
+            td #{center.country}
+            td #{center.city}
+            td
+              .btn-group
+                button.btn.btn-mini.dropdown-toggle(data-toggle="dropdown")
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href="#")
+                      i.icon-pencil
+                      span  Editar
+                  li
+                    a(href="#")
+                      i.icon-remove
+                      span  Eliminar
