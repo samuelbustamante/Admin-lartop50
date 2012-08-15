@@ -53,7 +53,7 @@ $(document).ready ->
 				401:(xhr) ->  # user and password not found
 					data= JSON.parse(xhr.responseText)
 					alert(data.message)
-		false
+		true
 
 
 	#

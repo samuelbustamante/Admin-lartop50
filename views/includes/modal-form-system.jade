@@ -1,0 +1,35 @@
+#modal-form-system.modal.fade(style='display: none;')
+  .modal-header
+    button.close(data-dismiss='modal') x
+    h3 Registrar equipo
+  .modal-body
+    form#form-system.form-horizontal(method='POST', action='/api/submission/systems')
+      fieldset
+        input.hide(type='text', name='center')
+        .control-group
+          label.control-label(for='name') Nombre
+          .controls
+            input(type='text', placeholder='Ingrese el nombre del equipo', name='name')
+        .control-group
+          label.control-label(for='status') Estado
+          .controls
+            input(type='text', placeholder='Ingrese el estado del equipo', name='status')
+        .control-group
+          label.control-label(for='area') Area de aplicación
+          .controls
+            input(type='text', placeholder='Ingrese el area de aplicación del equipo', name='area')
+        .control-group
+          label.control-label(for='description') Descripción
+          .controls
+            textarea(placeholder='Ingrese una breve descripción', name='description')
+        .control-group
+          label.control-label(for='description') Vendedor
+          .controls
+            input(type='text', placeholder='Ingrese el nombre del vendedor', name='vendor')
+        .control-group
+          label.control-label(for='description') Fecha de instalación
+          .controls
+            input(type='text', placeholder='Ingrese la fecha de instalación del equipo', name='installation')
+  .modal-footer
+    button#button-save-system.btn.btn-primary.save(data-loading-text="Registrando ...", autocomplete="off") Registrar
+
