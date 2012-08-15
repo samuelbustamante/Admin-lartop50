@@ -49,7 +49,6 @@ html(lang='es')
                 input.input-xlarge(type="text", name="email", placeholder="Correo electrónico")
               .control-group#ctrl-login-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
-              != recaptcha_form
               button.btn.btn-primary.btn-large.input-xlarge(type="submit", data-loading-text="Iniciando sesión ...", autocomplete="off") Iniciar sesión
             p.opens
               a(href="javascript:;", style="margin-right: 10px", now="#login").open-register Registrarse
@@ -74,6 +73,11 @@ html(lang='es')
                 input.input-xlarge(type="text", name="email", placeholder="Correo electrónico")
               .control-group#ctrl-register-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
+
+              // RECAPTCHA
+              center
+                != recaptcha_form
+
               button.btn.btn-success.btn-large.input-xlarge(type="submit", data-loading-text="Registrandote ...", autocomplete="off") Registrarse
             p.opens
               a(href="javascript:;", style="margin-right: 10px", now="#register").open-login Iniciar sesión
