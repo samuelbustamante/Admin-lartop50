@@ -14,6 +14,9 @@
     $("#modal-form-component").modal({
       show: false
     });
+    $("#modal-loader").modal({
+      show: false
+    });
     $("#button-new-center").click(function() {
       return $("#modal-form-center").modal("show");
     });
