@@ -5,7 +5,7 @@
     $("#modal-form-center").modal({
       show: false
     });
-    $("#modal-form-cluster").modal({
+    $("#modal-form-system").modal({
       show: false
     });
     $("#modal-form-linpack").modal({
@@ -17,8 +17,8 @@
     $("#button-new-center").click(function() {
       return $("#modal-form-center").modal("show");
     });
-    $("#button-new-cluster").click(function() {
-      return $("#modal-form-cluster").modal("show");
+    $("#button-new-system").click(function() {
+      return $("#modal-form-system").modal("show");
     });
     $("#button-new-linpack").click(function() {
       return $("#modal-form-linpack").modal("show");
@@ -78,11 +78,11 @@
       });
       return false;
     });
-    $("#button-save-cluster").click(function() {
+    $("#button-save-system").click(function() {
       $.ajax({
-        data: $("#form-cluster").serialize(),
-        url: $("#form-cluster").attr("action"),
-        type: $("#form-cluster").attr("method"),
+        data: $("#form-system").serialize(),
+        url: $("#form-system").attr("action"),
+        type: $("#form-system").attr("method"),
         statusCode: {
           200: function(data) {},
           400: function(xhr) {
