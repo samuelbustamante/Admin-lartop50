@@ -7,7 +7,7 @@ $(document).ready ->
 	$("#modal-form-center").modal
 		show:false
 
-	$("#modal-form-cluster").modal
+	$("#modal-form-system").modal
 		show:false
 
 	$("#modal-form-linpack").modal
@@ -22,8 +22,8 @@ $(document).ready ->
 	$("#button-new-center").click ->
 		$("#modal-form-center").modal("show")
 
-	$("#button-new-cluster").click ->
-		$("#modal-form-cluster").modal("show")
+	$("#button-new-system").click ->
+		$("#modal-form-system").modal("show")
 
 	$("#button-new-linpack").click ->
 		$("#modal-form-linpack").modal("show")
@@ -54,7 +54,6 @@ $(document).ready ->
 					data= JSON.parse(xhr.responseText)
 					alert(data.message)
 		true
-
 
 	#
 	# FORM CENTER
@@ -126,11 +125,11 @@ $(document).ready ->
 	# FORM CLUSTERS
 	#
 
-	$("#button-save-cluster").click ->
+	$("#button-save-system").click ->
 		$.ajax
-			data:$("#form-cluster").serialize()
-			url: $("#form-cluster").attr("action")
-			type:$("#form-cluster").attr("method")
+			data:$("#form-system").serialize()
+			url: $("#form-system").attr("action")
+			type:$("#form-system").attr("method")
 			statusCode:
 				200:(data) -> # cluster created successful
 				400:(xhr) ->  # invalid parameters
