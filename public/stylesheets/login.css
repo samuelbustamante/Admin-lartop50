@@ -1,0 +1,52 @@
+#login,
+#register,
+#activate {
+	text-align: center;
+	background: #FFF;
+}
+
+#login .page-header,
+#register .page-header,
+#activate .page-header {
+	padding: 0;
+	margin: 0 0 15px 0;
+}
+
+#login h3,
+#register h3,
+#activate h3 {
+	padding-bottom: 15px;
+}
+
+#login .alert,
+#register .alert,
+#activate .alert {
+	margin-bottom: 5px;
+}
+
+#form-login,
+#form-register,
+#form-activate {
+	margin: 0;
+	padding-top: 10px;
+}
+
+#form-login .control-group,
+#form-register .control-group,
+#form-activate .control-group {
+	margin-bottom: 0;
+}
+
+#form-login button,
+#form-register button,
+#form-activate button {
+	margin: 10px 0 5px 0;
+}
+
+.opens {
+	margin-top:14px;
+}
+
+.alert p {
+	margin-top: 9px;
+}

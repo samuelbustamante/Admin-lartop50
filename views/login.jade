@@ -6,8 +6,9 @@ html(lang='es')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content='')
     meta(name='author', content='')
-    link(href='http://fonts.googleapis.com/css?family=Electrolize', rel='stylesheet', type='text/css')
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+    link(href='/stylesheets/login.css', rel='stylesheet')
+    link(href='http://fonts.googleapis.com/css?family=Electrolize', rel='stylesheet', type='text/css')
     style
       body {
         background-image:url(/images/bg_body.jpg);
@@ -107,59 +108,6 @@ html(lang='es')
               |
               a(href="javascript:;", style="margin-left: 10px", now="#activate").open-login Iniciar sesión
 
-    style
-      #login,
-      #register,
-      #activate {
-        text-align: center;
-        background: #FFF;
-      }
-
-      #login .page-header,
-      #register .page-header,
-      #activate .page-header {
-        padding: 0;
-        margin: 0 0 15px 0;
-      }
-
-      #login h3,
-      #register h3,
-      #activate h3 {
-        padding-bottom: 15px;
-      }
-
-      #login .alert,
-      #register .alert,
-      #activate .alert {
-        margin-bottom: 5px;
-      }
-
-      #form-login,
-      #form-register,
-      #form-activate {
-        margin: 0;
-        padding-top: 10px;
-      }
-
-      #form-login .control-group,
-      #form-register .control-group,
-      #form-activate .control-group {
-        margin-bottom: 0;
-      }
-
-      #form-login button,
-      #form-register button,
-      #form-activate button {
-        margin: 10px 0 5px 0;
-      }
-
-      .opens {
-        margin-top:14px;
-      }
-
-      .alert p {
-        margin-top: 9px;
-      }
 
     script(src='/javascripts/jquery.js')
     script(src='/javascripts/bootstrap.min.js')
