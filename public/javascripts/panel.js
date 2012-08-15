@@ -27,6 +27,23 @@
       return $("#modal-form-component").modal("show");
     });
     $("#button-save-center").button();
+    $("#logout").click(function() {
+      $.ajax({
+        url: "/api/auth/logout",
+        type: "POST",
+        statusCode: {
+          200: function(data) {
+            return $(location).attr("href", "/ingresar");
+          },
+          401: function(xhr) {
+            var data;
+            data = JSON.parse(xhr.responseText);
+            return alert(data.message);
+          }
+        }
+      });
+      return false;
+    });
     $("#button-save-center").click(function() {
       var button;
       button = $(this);

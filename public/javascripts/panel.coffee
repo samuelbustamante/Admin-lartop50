@@ -38,6 +38,25 @@ $(document).ready ->
 	$("#button-save-center").button()
 
 	#
+	# LOGOUT
+	#
+
+	$("#logout").click ->
+
+		$.ajax
+			url: "/api/auth/logout"
+			type: "POST"
+			statusCode:
+				200:(data) -> # SUCCESSFUL LOGOUT
+					$(location).attr("href","/ingresar") #REDIRECT
+
+				401:(xhr) ->  # user and password not found
+					data= JSON.parse(xhr.responseText)
+					alert(data.message)
+		false
+
+
+	#
 	# FORM CENTER
 	#
 	
@@ -104,7 +123,7 @@ $(document).ready ->
 		false
 
 	#
-	#	FORMCLUSTERS
+	# FORM CLUSTERS
 	#
 
 	$("#button-save-cluster").click ->
@@ -122,7 +141,7 @@ $(document).ready ->
 		false
 
 	#
-	#FORM LINPACKS
+	# FORM LINPACKS
 	#
 
 	$("#button-save-linpack").click ->
@@ -140,7 +159,7 @@ $(document).ready ->
 		false
 
 	#
-	#FORM COMPONENTS
+	# FORM COMPONENTS
 	#
 
 	$("#button-save-component").click ->
