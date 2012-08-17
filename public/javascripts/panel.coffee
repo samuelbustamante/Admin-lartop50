@@ -228,7 +228,8 @@ $(document).ready ->
 			url : "/api/submissions/centers/#{center}"
 			type: "GET"
 			statusCode:
-				200: (data) ->
+				200: (json) ->
+					data = json.data
 					$("#system-now").html(" / #{data.description.acronym}")
 					for system in data.systems
 						$("#tbody-system").append(systemTR(system))
