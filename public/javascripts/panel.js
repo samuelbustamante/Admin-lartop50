@@ -2,7 +2,7 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, systemTR;
+    var actionsDIV, clickCenter, systemTR;
     $("#modal-form-center").modal({
       show: false
     });
@@ -146,9 +146,9 @@
     systemTR = function(data) {
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
-    $("a.center").click(function() {
+    clickCenter = function(a) {
       var center;
-      center = $(this).attr("center-id");
+      center = a.attr("center-id");
       $.ajax({
         url: "/api/submissions/centers/" + center,
         type: "GET",
@@ -170,6 +170,9 @@
         }
       });
       return false;
+    };
+    $("a.center").click(function() {
+      return clickCenter($(this));
     });
     return $("#back-centers").click(function() {
       $("#systems").hide();

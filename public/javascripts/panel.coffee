@@ -220,9 +220,9 @@ $(document).ready ->
 		</tr>
 		"""
 
-	$("a.center").click ->
+	clickCenter = (a)->
 
-		center = $(this).attr("center-id")
+		center = a.attr("center-id")
 
 		$.ajax
 			url : "/api/submissions/centers/#{center}"
@@ -238,6 +238,9 @@ $(document).ready ->
 				404: (xhr) ->
 				500: (xhr) ->
 		false
+
+	$("a.center").click ->
+		clickCenter($(this))
 
 	$("#back-centers").click ->
 		$("#systems").hide()
