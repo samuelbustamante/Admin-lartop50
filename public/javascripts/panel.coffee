@@ -238,3 +238,8 @@ $(document).ready ->
 				404: (xhr) ->
 				500: (xhr) ->
 		false
+
+	$("#back-centers").click ->
+		$("#systems").hide()
+		$("#centers").show()
+		$("#tbody-systems").html("")

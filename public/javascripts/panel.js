@@ -146,7 +146,7 @@
     systemTR = function(data) {
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
-    return $("a.center").click(function() {
+    $("a.center").click(function() {
       var center;
       center = $(this).attr("center-id");
       $.ajax({
@@ -170,6 +170,11 @@
         }
       });
       return false;
+    });
+    return $("#back-centers").click(function() {
+      $("#systems").hide();
+      $("#centers").show();
+      return $("#tbody-systems").html("");
     });
   });
 
