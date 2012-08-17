@@ -97,11 +97,6 @@
             system = data.data;
             $("#tbody-systems").append(systemTR(system));
             $("#modal-form-system").modal("hide");
-            $("#tbody-systems").find("a.center").each(function() {
-              return $(this).click(function() {
-                return clickCenter($(this));
-              });
-            });
             $("#form-system").each(function() {
               return this.reset();
             });

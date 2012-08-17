@@ -88,7 +88,7 @@ $(document).ready ->
 		false
 
 	#
-	# FORM CLUSTERS
+	# FORM SYSTEM
 	#
 
 	$("#button-save-system").click ->
@@ -105,9 +105,6 @@ $(document).ready ->
 					system = data.data
 					$("#tbody-systems").append(systemTR(system))
 					$("#modal-form-system").modal("hide")
-					$("#tbody-systems").find("a.center").each ->
-						$(this).click ->
-							clickCenter($(this))
 					$("#form-system").each ->
 						this.reset()
 					button.button("reset")
@@ -120,7 +117,7 @@ $(document).ready ->
 		false
 
 	#
-	# FORM LINPACKS
+	# FORM LINPACK
 	#
 
 	$("#button-save-linpack").click ->
