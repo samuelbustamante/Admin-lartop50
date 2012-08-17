@@ -16,9 +16,6 @@ $(document).ready ->
 	$("#modal-form-component").modal
 		show:false
 
-	$("#modal-loader").modal
-		show:false
-
 	#
 
 	$("#button-new-center").click ->
