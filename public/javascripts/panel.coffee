@@ -109,6 +109,7 @@ $(document).ready ->
 					$("#tbody-center").append(tr)
 					$("#modal-form-center").modal("hide")
 					$("#table-center").show()
+					$("#table-center").find("a.center")
 					$("#form-center").each ->
 						this.reset()
 					button.button("reset")
@@ -178,6 +179,47 @@ $(document).ready ->
 	# CENTER
 	#
 
+	actionsDIV = ->
+		"""
+		<div class="btn-group">
+			<button class="btn btn-mini dropdown-toggle", data-toggle="dropdown">
+			<span class="caret">
+				<ul class="dropdown-menu">
+					<li>
+						<a href="#">
+							<i class="icon-pencil">
+								<span> Editar</span>
+							</i>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-remove">
+								<span> Eliminar</span>
+							</i>
+						</a>
+					</li>
+				</ul>
+			</span>
+		</div>
+		"""
+
+	systemTR = (data) ->
+		"""
+		<tr>
+			<td>
+				<a href="javascript:;" class="center" center-id="#{center.id}">#{data.name}</a>
+			</td>
+			<td>
+				<span class="badge badge-info">#{center.status}</span>
+			</td>
+			<td>#{data.area}</td>
+			<td>#{data.vendor}</td>
+			<td>#{data.installation}</td>
+			<td>#{actionsDIV()}</td>
+		</tr>
+		"""
+
 	$("a.center").click ->
 
 		center = $(this).attr("center-id")
@@ -187,6 +229,11 @@ $(document).ready ->
 			type: "GET"
 			statusCode:
 				200: (data) ->
+					$("#system-now").html(" / #{data.description.acronym}")
+					for system in data.systems
+						$("#tbody-system").append(systemTR(system))
+					$("#table-center").hide()
+					$("#table-system").show()
 				404: (xhr) ->
 				500: (xhr) ->
 		false

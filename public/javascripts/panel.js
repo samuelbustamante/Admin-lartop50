@@ -2,6 +2,7 @@
 (function() {
 
   $(document).ready(function() {
+    var actionsDIV, systemTR;
     $("#modal-form-center").modal({
       show: false
     });
@@ -60,6 +61,7 @@
             $("#tbody-center").append(tr);
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
+            $("#table-center").find("a.center");
             $("#form-center").each(function() {
               return this.reset();
             });
@@ -138,6 +140,12 @@
       });
       return false;
     });
+    actionsDIV = function() {
+      return "<div class=\"btn-group\">\n	<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n	<span class=\"caret\">\n		<ul class=\"dropdown-menu\">\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-pencil\">\n						<span> Editar</span>\n					</i>\n				</a>\n			</li>\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-remove\">\n						<span> Eliminar</span>\n					</i>\n				</a>\n			</li>\n		</ul>\n	</span>\n</div>";
+    };
+    systemTR = function(data) {
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + center.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + center.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+    };
     return $("a.center").click(function() {
       var center;
       center = $(this).attr("center-id");
@@ -145,7 +153,17 @@
         url: "/api/submissions/centers/" + center,
         type: "GET",
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            var system, _i, _len, _ref;
+            $("#system-now").html(" / " + data.description.acronym);
+            _ref = data.systems;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              system = _ref[_i];
+              $("#tbody-system").append(systemTR(system));
+            }
+            $("#table-center").hide();
+            return $("#table-system").show();
+          },
           404: function(xhr) {},
           500: function(xhr) {}
         }
