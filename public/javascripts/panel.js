@@ -61,7 +61,11 @@
             $("#tbody-center").append(tr);
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
-            $("#table-center").find("a.center");
+            $("#tbody-center").find("a.center").each(function() {
+              return $(this).click(function() {
+                return clickCenter($(this));
+              });
+            });
             $("#form-center").each(function() {
               return this.reset();
             });
