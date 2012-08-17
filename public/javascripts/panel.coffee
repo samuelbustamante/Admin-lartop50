@@ -73,7 +73,7 @@ $(document).ready ->
 					tr = """
 							<tr>
 								<td>
-									<a href="javascript:;">#{center.name}</a>
+									<a href="javascript:;" class="center" center-id="#{center.id}">#{center.name}</a>
 								</td>
 								<td>#{center.acronym}</td>
 								<td>
@@ -166,10 +166,27 @@ $(document).ready ->
 			url: $("#form-component").attr("action")
 			type:$("#form-component").attr("method")
 			statusCode:
-				200:(data) -> # cluster created successful
-				400:(xhr) ->  # invalid parameters
+				200: (data) -> # cluster created successful
+				400: (xhr) ->  # invalid parameters
 					data= JSON.parse(xhr.responseText)
-				401:(xhr) ->  # not authenticated
+				401: (xhr) ->  # not authenticated
 					data= JSON.parse(xhr.responseText)
-				500:(xhr) ->  # internal error
+				500: (xhr) ->  # internal error
+		false
+
+	#
+	# CENTER
+	#
+
+	$("a.center").click ->
+
+		center = $(this).attr("center-id")
+
+		$.ajax
+			url : "/api/submissions/centers/#{center}"
+			type: "GET"
+			statusCode:
+				200: (data) ->
+				404: (xhr) ->
+				500: (xhr) ->
 		false

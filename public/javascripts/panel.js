@@ -56,7 +56,7 @@
           200: function(data) {
             var center, tr;
             center = data.data;
-            tr = "<tr>\n	<td>\n		<a href=\"javascript:;\">" + center.name + "</a>\n	</td>\n	<td>" + center.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + center.segment + "</span>\n	</td>\n	<td>" + center.country + "</td>\n	<td>" + center.city + "</td>\n	<td>\n		<div class=\"btn-group\">\n			<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n			<span class=\"caret\">\n				<ul class=\"dropdown-menu\">\n					<li>\n						<a href=\"#\">\n							<i class=\"icon-pencil\">\n								<span> Editar</span>\n							</i>\n						</a>\n					</li>\n					<li>\n						<a href=\"#\">\n							<i class=\"icon-remove\">\n								<span> Eliminar</span>\n							</i>\n						</a>\n					</li>\n				</ul>\n			</span>\n		</div>\n	</td>\n</tr>";
+            tr = "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + center.id + "\">" + center.name + "</a>\n	</td>\n	<td>" + center.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + center.segment + "</span>\n	</td>\n	<td>" + center.country + "</td>\n	<td>" + center.city + "</td>\n	<td>\n		<div class=\"btn-group\">\n			<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n			<span class=\"caret\">\n				<ul class=\"dropdown-menu\">\n					<li>\n						<a href=\"#\">\n							<i class=\"icon-pencil\">\n								<span> Editar</span>\n							</i>\n						</a>\n					</li>\n					<li>\n						<a href=\"#\">\n							<i class=\"icon-remove\">\n								<span> Eliminar</span>\n							</i>\n						</a>\n					</li>\n				</ul>\n			</span>\n		</div>\n	</td>\n</tr>";
             $("#tbody-center").append(tr);
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
@@ -118,7 +118,7 @@
       });
       return false;
     });
-    return $("#button-save-component").click(function() {
+    $("#button-save-component").click(function() {
       $.ajax({
         data: $("#form-component").serialize(),
         url: $("#form-component").attr("action"),
@@ -133,6 +133,20 @@
             var data;
             return data = JSON.parse(xhr.responseText);
           },
+          500: function(xhr) {}
+        }
+      });
+      return false;
+    });
+    return $("a.center").click(function() {
+      var center;
+      center = $(this).attr("center-id");
+      $.ajax({
+        url: "/api/submissions/centers/" + center,
+        type: "GET",
+        statusCode: {
+          200: function(data) {},
+          404: function(xhr) {},
           500: function(xhr) {}
         }
       });
