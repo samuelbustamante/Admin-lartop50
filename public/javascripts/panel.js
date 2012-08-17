@@ -95,9 +95,9 @@
           200: function(data) {
             var system;
             system = data.data;
-            $("#tbody-system").append(systemTR(system));
+            $("#tbody-systems").append(systemTR(system));
             $("#modal-form-system").modal("hide");
-            $("#tbody-system").find("a.center").each(function() {
+            $("#tbody-systems").find("a.center").each(function() {
               return $(this).click(function() {
                 return clickCenter($(this));
               });

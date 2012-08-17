@@ -103,9 +103,9 @@ $(document).ready ->
 			statusCode:
 				200:(data) -> # cluster created successful
 					system = data.data
-					$("#tbody-system").append(systemTR(system))
+					$("#tbody-systems").append(systemTR(system))
 					$("#modal-form-system").modal("hide")
-					$("#tbody-system").find("a.center").each ->
+					$("#tbody-systems").find("a.center").each ->
 						$(this).click ->
 							clickCenter($(this))
 					$("#form-system").each ->
