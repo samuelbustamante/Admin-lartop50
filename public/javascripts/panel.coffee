@@ -232,9 +232,9 @@ $(document).ready ->
 					data = json.data
 					$("#system-now").html(" / #{data.description.acronym}")
 					for system in data.systems
-						$("#tbody-system").append(systemTR(system))
-					$("#table-center").hide()
-					$("#table-system").show()
+						$("#tbody-systems").append(systemTR(system))
+					$("#centers").hide()
+					$("#systems").show()
 				404: (xhr) ->
 				500: (xhr) ->
 		false

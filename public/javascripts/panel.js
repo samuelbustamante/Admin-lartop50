@@ -160,10 +160,10 @@
             _ref = data.systems;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               system = _ref[_i];
-              $("#tbody-system").append(systemTR(system));
+              $("#tbody-systems").append(systemTR(system));
             }
-            $("#table-center").hide();
-            return $("#table-system").show();
+            $("#centers").hide();
+            return $("#systems").show();
           },
           404: function(xhr) {},
           500: function(xhr) {}
