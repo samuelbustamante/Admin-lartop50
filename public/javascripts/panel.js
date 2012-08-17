@@ -167,7 +167,8 @@
               $("#tbody-systems").append(systemTR(system));
             }
             $("#centers").hide();
-            return $("#systems").show();
+            $("#systems").show();
+            return $("#input-center").val(center);
           },
           404: function(xhr) {},
           500: function(xhr) {}

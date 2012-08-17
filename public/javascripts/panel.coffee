@@ -237,6 +237,7 @@ $(document).ready ->
 						$("#tbody-systems").append(systemTR(system))
 					$("#centers").hide()
 					$("#systems").show()
+					$("#input-center").val(center)
 				404: (xhr) ->
 				500: (xhr) ->
 		false
