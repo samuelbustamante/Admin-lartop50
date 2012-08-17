@@ -153,8 +153,9 @@
         url: "/api/submissions/centers/" + center,
         type: "GET",
         statusCode: {
-          200: function(data) {
-            var system, _i, _len, _ref;
+          200: function(json) {
+            var data, system, _i, _len, _ref;
+            data = json.data;
             $("#system-now").html(" / " + data.description.acronym);
             _ref = data.systems;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
