@@ -70,45 +70,9 @@ $(document).ready ->
 			statusCode:
 				200:(data) -> # CENTER CREATED SUCCESSFUL
 					center = data.data
-					tr = """
-							<tr>
-								<td>
-									<a href="javascript:;" class="center" center-id="#{center.id}">#{center.name}</a>
-								</td>
-								<td>#{center.acronym}</td>
-								<td>
-									<span class="badge badge-info">#{center.segment}</span>
-								</td>
-								<td>#{center.country}</td>
-								<td>#{center.city}</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-mini dropdown-toggle", data-toggle="dropdown">
-										<span class="caret">
-											<ul class="dropdown-menu">
-												<li>
-													<a href="#">
-														<i class="icon-pencil">
-															<span> Editar</span>
-														</i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="icon-remove">
-															<span> Eliminar</span>
-														</i>
-													</a>
-												</li>
-											</ul>
-										</span>
-									</div>
-								</td>
-							</tr>
-						"""
-					$("#tbody-center").append(tr)
+					$("#tbody-center").append(centerTR(center))
 					$("#modal-form-center").modal("hide")
-					$("#table-center").show()
+					$("#table-center").show() # REVIEW !!!
 					$("#tbody-center").find("a.center").each ->
 						$(this).click ->
 							clickCenter($(this))
@@ -128,12 +92,26 @@ $(document).ready ->
 	#
 
 	$("#button-save-system").click ->
+		button = $(this)
+
+		button.button("loading")
+
 		$.ajax
 			data:$("#form-system").serialize()
 			url: $("#form-system").attr("action")
 			type:$("#form-system").attr("method")
 			statusCode:
 				200:(data) -> # cluster created successful
+					system = data.data
+					$("#tbody-system").append(systemTR(system))
+					$("#modal-form-system").modal("hide")
+					$("#tbody-system").find("a.center").each ->
+						$(this).click ->
+							clickCenter($(this))
+					$("#form-system").each ->
+						this.reset()
+					button.button("reset")
+
 				400:(xhr) ->  # invalid parameters
 					data= JSON.parse(xhr.responseText)
 				401:(xhr) ->  # not authenticated
@@ -204,6 +182,22 @@ $(document).ready ->
 				</ul>
 			</span>
 		</div>
+		"""
+
+	centerTR = (data) ->
+		"""
+		<tr>
+			<td>
+				<a href="javascript:;" class="center" center-id="#{data.id}">#{data.name}</a>
+			</td>
+			<td>#{data.acronym}</td>
+			<td>
+				<span class="badge badge-info">#{data.segment}</span>
+			</td>
+			<td>#{data.country}</td>
+			<td>#{data.city}</td>
+			<td>#{actionsDIV()}</td>
+		</tr>
 		"""
 
 	systemTR = (data) ->

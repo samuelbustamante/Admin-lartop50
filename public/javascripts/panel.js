@@ -2,7 +2,7 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, clickCenter, systemTR;
+    var actionsDIV, centerTR, clickCenter, systemTR;
     $("#modal-form-center").modal({
       show: false
     });
@@ -55,10 +55,9 @@
         type: $("#form-center").attr("method"),
         statusCode: {
           200: function(data) {
-            var center, tr;
+            var center;
             center = data.data;
-            tr = "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + center.id + "\">" + center.name + "</a>\n	</td>\n	<td>" + center.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + center.segment + "</span>\n	</td>\n	<td>" + center.country + "</td>\n	<td>" + center.city + "</td>\n	<td>\n		<div class=\"btn-group\">\n			<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n			<span class=\"caret\">\n				<ul class=\"dropdown-menu\">\n					<li>\n						<a href=\"#\">\n							<i class=\"icon-pencil\">\n								<span> Editar</span>\n							</i>\n						</a>\n					</li>\n					<li>\n						<a href=\"#\">\n							<i class=\"icon-remove\">\n								<span> Eliminar</span>\n							</i>\n						</a>\n					</li>\n				</ul>\n			</span>\n		</div>\n	</td>\n</tr>";
-            $("#tbody-center").append(tr);
+            $("#tbody-center").append(centerTR(center));
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
             $("#tbody-center").find("a.center").each(function() {
@@ -85,12 +84,29 @@
       return false;
     });
     $("#button-save-system").click(function() {
+      var button;
+      button = $(this);
+      button.button("loading");
       $.ajax({
         data: $("#form-system").serialize(),
         url: $("#form-system").attr("action"),
         type: $("#form-system").attr("method"),
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            var system;
+            system = data.data;
+            $("#tbody-system").append(systemTR(system));
+            $("#modal-form-system").modal("hide");
+            $("#tbody-system").find("a.center").each(function() {
+              return $(this).click(function() {
+                return clickCenter($(this));
+              });
+            });
+            $("#form-system").each(function() {
+              return this.reset();
+            });
+            return button.button("reset");
+          },
           400: function(xhr) {
             var data;
             return data = JSON.parse(xhr.responseText);
@@ -146,6 +162,9 @@
     });
     actionsDIV = function() {
       return "<div class=\"btn-group\">\n	<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n	<span class=\"caret\">\n		<ul class=\"dropdown-menu\">\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-pencil\">\n						<span> Editar</span>\n					</i>\n				</a>\n			</li>\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-remove\">\n						<span> Eliminar</span>\n					</i>\n				</a>\n			</li>\n		</ul>\n	</span>\n</div>";
+    };
+    centerTR = function(data) {
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.segment + "</span>\n	</td>\n	<td>" + data.country + "</td>\n	<td>" + data.city + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     systemTR = function(data) {
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
