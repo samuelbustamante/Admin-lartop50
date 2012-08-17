@@ -208,10 +208,10 @@ $(document).ready ->
 		"""
 		<tr>
 			<td>
-				<a href="javascript:;" class="center" center-id="#{center.id}">#{data.name}</a>
+				<a href="javascript:;" class="center" center-id="#{data.id}">#{data.name}</a>
 			</td>
 			<td>
-				<span class="badge badge-info">#{center.status}</span>
+				<span class="badge badge-info">#{data.status}</span>
 			</td>
 			<td>#{data.area}</td>
 			<td>#{data.vendor}</td>
