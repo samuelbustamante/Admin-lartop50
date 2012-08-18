@@ -85,7 +85,6 @@ $(document).ready ->
 				401:(xhr) ->  # NOT AUTHENTICATED
 					data= JSON.parse(xhr.responseText)
 				500:(xhr) ->  # INTERNAL ERROR
-		false
 
 	#
 	# FORM SYSTEM
