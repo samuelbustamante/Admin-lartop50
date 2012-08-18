@@ -69,6 +69,7 @@
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
             input - (center = $("#input-center").val());
+            alert(input - center);
             $("#form-center").each(function() {
               return this.reset();
             });
