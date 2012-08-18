@@ -71,12 +71,12 @@ $(document).ready ->
 			statusCode:
 				200:(data) -> # CENTER CREATED SUCCESSFUL
 					center = data.data
-					$("#tbody-center").append(centerTR(center))
+					tr = $(centerTR(center))
+					$("#tbody-center").append(tr)
 					$("#modal-form-center").modal("hide")
 					$("#table-center").show() # REVIEW !!!
-					$("#tbody-center").find("a.center").each ->
-						$(this).click ->
-							clickCenter($(this))
+					tr.click ->
+						clickCenter($(this))
 					$("#form-center").each ->
 						this.reset()
 					button.button("reset")

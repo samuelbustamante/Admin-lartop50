@@ -57,15 +57,14 @@
         async: true,
         statusCode: {
           200: function(data) {
-            var center;
+            var center, tr;
             center = data.data;
-            $("#tbody-center").append(centerTR(center));
+            tr = $(centerTR(center));
+            $("#tbody-center").append(tr);
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
-            $("#tbody-center").find("a.center").each(function() {
-              return $(this).click(function() {
-                return clickCenter($(this));
-              });
+            tr.click(function() {
+              return clickCenter($(this));
             });
             $("#form-center").each(function() {
               return this.reset();
