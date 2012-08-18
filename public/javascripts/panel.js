@@ -49,7 +49,7 @@
       var button;
       button = $(this);
       button.button("loading");
-      $.ajax({
+      return $.ajax({
         data: $("#form-center").serialize(),
         url: $("#form-center").attr("action"),
         type: $("#form-center").attr("method"),
@@ -81,7 +81,6 @@
           500: function(xhr) {}
         }
       });
-      return false;
     });
     $("#button-save-system").click(function() {
       var button;
