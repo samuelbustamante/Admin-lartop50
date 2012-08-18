@@ -78,8 +78,10 @@ $(document).ready ->
 					$("#tbody-center").append(tr)
 					$("#modal-form-center").modal("hide")
 					$("#table-center").show() # REVIEW !!!
+					input-center = $("#input-center").val()
 					$("#form-center").each ->
 						this.reset()
+					$("#input-center").val(input-center)
 					button.button("reset")
 					success = true
 				400:(xhr) ->  # INVALID PARAMETERS

@@ -68,9 +68,11 @@
             $("#tbody-center").append(tr);
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
+            input - (center = $("#input-center").val());
             $("#form-center").each(function() {
               return this.reset();
             });
+            $("#input-center").val(input - center);
             button.button("reset");
             return success = true;
           },
