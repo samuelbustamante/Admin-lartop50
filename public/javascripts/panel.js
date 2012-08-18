@@ -46,13 +46,15 @@
       return true;
     });
     $("#button-save-center").click(function() {
-      var button;
+      var button, success;
+      success = false;
       button = $(this);
       button.button("loading");
-      return $.ajax({
+      $.ajax({
         data: $("#form-center").serialize(),
         url: $("#form-center").attr("action"),
         type: $("#form-center").attr("method"),
+        async: false,
         statusCode: {
           200: function(data) {
             var center;
@@ -68,7 +70,8 @@
             $("#form-center").each(function() {
               return this.reset();
             });
-            return button.button("reset");
+            button.button("reset");
+            return success = true;
           },
           400: function(xhr) {
             var data;
@@ -81,6 +84,7 @@
           500: function(xhr) {}
         }
       });
+      return success;
     });
     $("#button-save-system").click(function() {
       var button;

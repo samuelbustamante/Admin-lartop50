@@ -59,14 +59,15 @@ $(document).ready ->
 	#
 	
 	$("#button-save-center").click ->
+		success = false
 		button = $(this)
-
 		button.button("loading")
 
 		$.ajax
 			data:$("#form-center").serialize()
 			url: $("#form-center").attr("action")
 			type:$("#form-center").attr("method")
+			async: false
 			statusCode:
 				200:(data) -> # CENTER CREATED SUCCESSFUL
 					center = data.data
@@ -79,12 +80,13 @@ $(document).ready ->
 					$("#form-center").each ->
 						this.reset()
 					button.button("reset")
-
+					success = true
 				400:(xhr) ->  # INVALID PARAMETERS
 					data= JSON.parse(xhr.responseText)
 				401:(xhr) ->  # NOT AUTHENTICATED
 					data= JSON.parse(xhr.responseText)
 				500:(xhr) ->  # INTERNAL ERROR
+		success
 
 	#
 	# FORM SYSTEM
