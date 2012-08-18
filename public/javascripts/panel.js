@@ -60,12 +60,14 @@
             var center, tr;
             center = data.data;
             tr = $(centerTR(center));
+            tr.find("a.center").each(function() {
+              return $(this).click(function() {
+                return clickCenter($(this));
+              });
+            });
             $("#tbody-center").append(tr);
             $("#modal-form-center").modal("hide");
             $("#table-center").show();
-            $("#tbody-center").find(tr).click(function() {
-              return clickCenter($(this));
-            });
             $("#form-center").each(function() {
               return this.reset();
             });
