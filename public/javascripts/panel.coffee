@@ -78,11 +78,8 @@ $(document).ready ->
 					$("#tbody-center").append(tr)
 					$("#modal-form-center").modal("hide")
 					$("#table-center").show() # REVIEW !!!
-					input-center = $("#input-center").val()
-					alert(input-center)
 					$("#form-center").each ->
 						this.reset()
-					$("#input-center").val(input-center)
 					button.button("reset")
 					success = true
 				400:(xhr) ->  # INVALID PARAMETERS
@@ -110,10 +107,11 @@ $(document).ready ->
 					system = data.data
 					$("#tbody-systems").append(systemTR(system))
 					$("#modal-form-system").modal("hide")
+					input-center = $("#input-center").val()
 					$("#form-system").each ->
 						this.reset()
+					$("#input-center").val(input-center)
 					button.button("reset")
-
 				400:(xhr) ->  # invalid parameters
 					data= JSON.parse(xhr.responseText)
 				401:(xhr) ->  # not authenticated
