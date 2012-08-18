@@ -54,7 +54,7 @@
         data: $("#form-center").serialize(),
         url: $("#form-center").attr("action"),
         type: $("#form-center").attr("method"),
-        async: false,
+        async: true,
         statusCode: {
           200: function(data) {
             var center;
