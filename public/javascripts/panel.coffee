@@ -67,7 +67,7 @@ $(document).ready ->
 			data:$("#form-center").serialize()
 			url: $("#form-center").attr("action")
 			type:$("#form-center").attr("method")
-			async: false
+			async: true
 			statusCode:
 				200:(data) -> # CENTER CREATED SUCCESSFUL
 					center = data.data
