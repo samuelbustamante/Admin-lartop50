@@ -79,6 +79,7 @@ $(document).ready ->
 					$("#modal-form-center").modal("hide")
 					$("#table-center").show() # REVIEW !!!
 					input-center = $("#input-center").val()
+					alert(input-center)
 					$("#form-center").each ->
 						this.reset()
 					$("#input-center").val(input-center)
