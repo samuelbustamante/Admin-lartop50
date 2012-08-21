@@ -97,9 +97,15 @@
         type: $("#form-system").attr("method"),
         statusCode: {
           200: function(data) {
-            var input_center, system;
+            var input_center, system, tr;
             system = data.data;
-            $("#tbody-systems").append(systemTR(system));
+            tr = systemTR(system);
+            tr.find("a.system").each(function() {
+              return $(this).click(function() {
+                return clickSystem($(this));
+              });
+            });
+            $("#tbody-systems").append(tr);
             $("#modal-form-system").modal("hide");
             input_center = $("#input-center").val();
             $("#form-system").each(function() {
@@ -131,9 +137,15 @@
         type: $("#form-component").attr("method"),
         statusCode: {
           200: function(data) {
-            var component, input_system;
+            var component, input_system, tr;
             component = data.data;
-            $("#tbody-components").append(componentTR(component));
+            tr = componentTR(component);
+            tr.find("a.component").each(function() {
+              return $(this).click(function() {
+                return clickComponent($(this));
+              });
+            });
+            $("#tbody-components").append(tr);
             $("#modal-form-component").modal("hide");
             input_system = $("#input-system").val();
             $("#form-component").each(function() {

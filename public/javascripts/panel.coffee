@@ -103,7 +103,13 @@ $(document).ready ->
 			statusCode:
 				200:(data) -> # cluster created successful
 					system = data.data
-					$("#tbody-systems").append(systemTR(system))
+					tr = systemTR(system)
+
+					tr.find("a.system").each ->
+						$(this).click ->
+							clickSystem($(this))
+
+					$("#tbody-systems").append(tr)
 					$("#modal-form-system").modal("hide")
 					input_center = $("#input-center").val()
 					$("#form-system").each ->
@@ -131,7 +137,13 @@ $(document).ready ->
 			statusCode:
 				200: (data) -> # cluster created successful
 					component = data.data
-					$("#tbody-components").append(componentTR(component))
+					tr = componentTR(component)
+
+					tr.find("a.component").each ->
+						$(this).click ->
+							clickComponent($(this))
+
+					$("#tbody-components").append(tr)
 					$("#modal-form-component").modal("hide")
 					input_system = $("#input-system").val()
 					$("#form-component").each ->
