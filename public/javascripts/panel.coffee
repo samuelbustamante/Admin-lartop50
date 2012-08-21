@@ -256,7 +256,7 @@ $(document).ready ->
 	clickSystem = (a)->
 		system = a.attr("system-id")
 		$.ajax
-			url : "/api/submissions/system/#{system}"
+			url : "/api/submissions/systems/#{system}"
 			type: "GET"
 			statusCode:
 				200: (json) ->
