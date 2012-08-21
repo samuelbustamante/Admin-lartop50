@@ -245,7 +245,7 @@
             var center_now, component, data, _i, _len, _ref;
             data = json.data;
             center_now = $("#center-now").html();
-            $("#back-centers-components").html(center_now.replace(' /', ''));
+            $("#back-systems-components").html(center_now.replace(' /', ''));
             $("#system-now").html(" / " + data.description.name);
             _ref = data.components;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {

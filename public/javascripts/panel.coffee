@@ -291,7 +291,7 @@ $(document).ready ->
 				200: (json) ->
 					data = json.data
 					center_now = $("#center-now").html()
-					$("#back-centers-components").html(center_now.replace(' /', ''))
+					$("#back-systems-components").html(center_now.replace(' /', ''))
 					$("#system-now").html(" / #{data.description.name}")
 					for component in data.components
 						$("#tbody-components").append(componentTR(component))
