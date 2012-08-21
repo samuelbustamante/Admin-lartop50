@@ -302,6 +302,7 @@
       		false
       */
 
+      $("#modal-component-title").html(a.html());
       return $("#modal-component").modal("show");
     };
     $("a.component").click(function() {

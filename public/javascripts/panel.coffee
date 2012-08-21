@@ -343,6 +343,7 @@ $(document).ready ->
 				500: (xhr) ->
 		false
 		###
+		$("#modal-component-title").html(a.html())
 		$("#modal-component").modal("show")
 
 	$("a.component").click ->
