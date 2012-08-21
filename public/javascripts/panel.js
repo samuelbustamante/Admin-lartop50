@@ -2,7 +2,7 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, centerTR, clickCenter, systemTR;
+    var actionsDIV, centerTR, clickCenter, clickSystem, systemTR;
     $("#modal-form-center").modal({
       show: false
     });
@@ -168,7 +168,7 @@
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.segment + "</span>\n	</td>\n	<td>" + data.country + "</td>\n	<td>" + data.city + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     systemTR = function(data) {
-      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     clickCenter = function(a) {
       var center;
@@ -178,13 +178,19 @@
         type: "GET",
         statusCode: {
           200: function(json) {
-            var data, system, _i, _len, _ref;
+            var data, system, tr, _i, _len, _ref;
             data = json.data;
-            $("#system-now").html(" / " + data.description.acronym);
+            $("#center-now").html(" / " + data.description.acronym);
             _ref = data.systems;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               system = _ref[_i];
-              $("#tbody-systems").append(systemTR(system));
+              tr = $(systemTR(system));
+              tr.find("a.system").each(function() {
+                return a.click(function() {
+                  return clickCenter($(this));
+                });
+              });
+              $("#tbody-systems").append();
             }
             $("#centers").hide();
             $("#systems").show();
@@ -199,7 +205,43 @@
     $("a.center").click(function() {
       return clickCenter($(this));
     });
-    return $("#back-centers").click(function() {
+    $("#back-centers").click(function() {
+      $("#systems").hide();
+      $("#centers").show();
+      return $("#tbody-systems").html("");
+    });
+    clickSystem = function(a) {
+      var system;
+      system = a.attr("system-id");
+      $.ajax({
+        url: "/api/submissions/system/" + system,
+        type: "GET",
+        statusCode: {
+          200: function(json) {
+            var center_now, component, data, _i, _len, _ref;
+            data = json.data;
+            center_now = $("#center-now").html();
+            $("#system-center-now").html(center_now);
+            $("#system-now").html(" / " + data.description.acronym);
+            _ref = data.components;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              component = _ref[_i];
+              $("#tbody-components").append(componentTR(system));
+            }
+            $("#systems").hide();
+            $("#components").show();
+            return $("#input-system").val(system);
+          },
+          404: function(xhr) {},
+          500: function(xhr) {}
+        }
+      });
+      return false;
+    };
+    $("a.system").click(function() {
+      return clickSystem($(this));
+    });
+    return $("#back-systems").click(function() {
       $("#systems").hide();
       $("#centers").show();
       return $("#tbody-systems").html("");

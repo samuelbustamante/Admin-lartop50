@@ -204,7 +204,7 @@ $(document).ready ->
 		"""
 		<tr>
 			<td>
-				<a href="javascript:;" class="center" center-id="#{data.id}">#{data.name}</a>
+				<a href="javascript:;" class="system" center-id="#{data.id}">#{data.name}</a>
 			</td>
 			<td>
 				<span class="badge badge-info">#{data.status}</span>
@@ -215,20 +215,25 @@ $(document).ready ->
 			<td>#{actionsDIV()}</td>
 		</tr>
 		"""
+	#
+	# CENTERS
+	#
 
 	clickCenter = (a)->
-
 		center = a.attr("center-id")
-
 		$.ajax
 			url : "/api/submissions/centers/#{center}"
 			type: "GET"
 			statusCode:
 				200: (json) ->
 					data = json.data
-					$("#system-now").html(" / #{data.description.acronym}")
+					$("#center-now").html(" / #{data.description.acronym}")
 					for system in data.systems
-						$("#tbody-systems").append(systemTR(system))
+						tr = $(systemTR(system))
+						tr.find("a.system").each ->
+							a.click ->
+								clickCenter($(this))
+						$("#tbody-systems").append()
 					$("#centers").hide()
 					$("#systems").show()
 					$("#input-center").val(center)
@@ -243,3 +248,36 @@ $(document).ready ->
 		$("#systems").hide()
 		$("#centers").show()
 		$("#tbody-systems").html("")
+
+	#
+	# SYSTEMS
+	#
+
+	clickSystem = (a)->
+		system = a.attr("system-id")
+		$.ajax
+			url : "/api/submissions/system/#{system}"
+			type: "GET"
+			statusCode:
+				200: (json) ->
+					data = json.data
+					center_now = $("#center-now").html()
+					$("#system-center-now").html(center_now)
+					$("#system-now").html(" / #{data.description.acronym}")
+					for component in data.components
+						$("#tbody-components").append(componentTR(system))
+					$("#systems").hide()
+					$("#components").show()
+					$("#input-system").val(system)
+				404: (xhr) ->
+				500: (xhr) ->
+		false
+
+	$("a.system").click ->
+		clickSystem($(this))
+
+	$("#back-systems").click ->
+		$("#systems").hide()
+		$("#centers").show()
+		$("#tbody-systems").html("")
+
