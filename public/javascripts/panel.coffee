@@ -239,7 +239,7 @@ $(document).ready ->
 		"""
 		<tr>
 			<td>
-				<a href="javascript:;" class="component" system-id="#{data.id}">#{data.name}</a>
+				<a href="javascript:;" class="component" component-id="#{data.id}">#{data.name}</a>
 			</td>
 			<td>#{data.model}</td>
 			<td>#{data.vendor}</td>
@@ -296,7 +296,13 @@ $(document).ready ->
 					$("#back-systems-components").html(center_now.replace(' /', ''))
 					$("#system-now").html(" / #{data.description.name}")
 					for component in data.components
-						$("#tbody-components").append(componentTR(component))
+
+						tr = $(componentTR(component))
+						tr.find("a.component").each ->
+							$(this).click ->
+								clickComponent($(this))
+						$("#tbody-components").append(tr)
+
 					$("#systems").hide()
 					$("#components").show()
 					$("#input-system").val(system)
@@ -316,6 +322,32 @@ $(document).ready ->
 	# COMPONENTS
 	#
 
+	clickComponent = (a)->
+		system = a.attr("component-id")
+		###
+		$.ajax
+			url : "/api/submissions/component/#{component}"
+			type: "GET"
+			statusCode:
+				200: (json) ->
+					data = json.data
+					center_now = $("#center-now").html()
+					$("#back-systems-components").html(center_now.replace(' /', ''))
+					$("#system-now").html(" / #{data.description.name}")
+					for component in data.components
+						$("#tbody-components").append(componentTR(component))
+					$("#systems").hide()
+					$("#components").show()
+					$("#input-system").val(system)
+				404: (xhr) ->
+				500: (xhr) ->
+		false
+		###
+		$("#modal-component").modal("show")
+
+	$("a.component").click ->
+		clickComponent($(this))
+
 	$("#back-centers-components").click ->
 		$("#components").hide()
 		$("#centers").show()
@@ -326,3 +358,4 @@ $(document).ready ->
 		$("#components").hide()
 		$("#systems").show()
 		$("#tbody-components").html("")
+

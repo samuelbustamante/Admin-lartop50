@@ -2,7 +2,7 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, centerTR, clickCenter, clickSystem, componentTR, systemTR;
+    var actionsDIV, centerTR, clickCenter, clickComponent, clickSystem, componentTR, systemTR;
     $("#modal-form-center").modal({
       show: false
     });
@@ -200,7 +200,7 @@
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     componentTR = function(data) {
-      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"component\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.model + "</td>\n	<td>" + data.vendor + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.nodes + "</span>\n	</td>\n	<td>" + data.processor_name + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"component\" component-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.model + "</td>\n	<td>" + data.vendor + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.nodes + "</span>\n	</td>\n	<td>" + data.processor_name + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     clickCenter = function(a) {
       var center;
@@ -245,7 +245,7 @@
         type: "GET",
         statusCode: {
           200: function(json) {
-            var center_now, component, data, _i, _len, _ref;
+            var center_now, component, data, tr, _i, _len, _ref;
             data = json.data;
             center_now = $("#center-now").html();
             $("#back-systems-components").html(center_now.replace(' /', ''));
@@ -253,7 +253,13 @@
             _ref = data.components;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               component = _ref[_i];
-              $("#tbody-components").append(componentTR(component));
+              tr = $(componentTR(component));
+              tr.find("a.component").each(function() {
+                return $(this).click(function() {
+                  return clickComponent($(this));
+                });
+              });
+              $("#tbody-components").append(tr);
             }
             $("#systems").hide();
             $("#components").show();
@@ -272,6 +278,34 @@
       $("#systems").hide();
       $("#centers").show();
       return $("#tbody-systems").html("");
+    });
+    clickComponent = function(a) {
+      var system;
+      system = a.attr("component-id");
+      /*
+      		$.ajax
+      			url : "/api/submissions/component/#{component}"
+      			type: "GET"
+      			statusCode:
+      				200: (json) ->
+      					data = json.data
+      					center_now = $("#center-now").html()
+      					$("#back-systems-components").html(center_now.replace(' /', ''))
+      					$("#system-now").html(" / #{data.description.name}")
+      					for component in data.components
+      						$("#tbody-components").append(componentTR(component))
+      					$("#systems").hide()
+      					$("#components").show()
+      					$("#input-system").val(system)
+      				404: (xhr) ->
+      				500: (xhr) ->
+      		false
+      */
+
+      return $("#modal-component").modal("show");
+    };
+    $("a.component").click(function() {
+      return clickComponent($(this));
     });
     $("#back-centers-components").click(function() {
       $("#components").hide();
