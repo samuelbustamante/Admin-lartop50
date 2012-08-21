@@ -277,7 +277,8 @@
     });
     return $("#back-systems-components").click(function() {
       $("#components").hide();
-      return $("#systems").show();
+      $("#systems").show();
+      return $("#tbody-components").html("");
     });
   });
 

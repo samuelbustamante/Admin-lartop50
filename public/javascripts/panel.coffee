@@ -322,4 +322,4 @@ $(document).ready ->
 	$("#back-systems-components").click ->
 		$("#components").hide()
 		$("#systems").show()
-
+		$("#tbody-components").html("")
