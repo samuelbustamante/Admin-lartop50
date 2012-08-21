@@ -104,11 +104,9 @@ $(document).ready ->
 				200:(data) -> # cluster created successful
 					system = data.data
 					tr = $(systemTR(system))
-
 					tr.find("a.system").each ->
 						$(this).click ->
 							clickSystem($(this))
-
 					$("#tbody-systems").append(tr)
 					$("#modal-form-system").modal("hide")
 					input_center = $("#input-center").val()
@@ -138,11 +136,9 @@ $(document).ready ->
 				200: (data) -> # cluster created successful
 					component = data.data
 					tr = $(componentTR(component))
-
 					tr.find("a.component").each ->
 						$(this).click ->
 							clickComponent($(this))
-
 					$("#tbody-components").append(tr)
 					$("#modal-form-component").modal("hide")
 					input_system = $("#input-system").val()
@@ -282,11 +278,6 @@ $(document).ready ->
 	$("a.center").click ->
 		clickCenter($(this))
 
-	$("#back-centers").click ->
-		$("#systems").hide()
-		$("#centers").show()
-		$("#tbody-systems").html("")
-
 	#
 	# SYSTEMS
 	#
@@ -314,8 +305,22 @@ $(document).ready ->
 	$("a.system").click ->
 		clickSystem($(this))
 
-	$("#back-systems").click ->
+	$("#back-centers-systems").click ->
 		$("#systems").hide()
 		$("#centers").show()
+		$("#tbody-systems").html("")
+
+	#
+	# COMPONENTS
+	#
+
+	$("#back-centers-components").click ->
+		$("#components").hide()
+		$("#centers").show()
+		$("#tbody-systems").html("")
+
+	$("#back-systems-components").click ->
+		$("#components").hide()
+		$("#systems").show()
 		$("#tbody-systems").html("")
 

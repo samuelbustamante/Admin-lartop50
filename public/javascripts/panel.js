@@ -234,11 +234,6 @@
     $("a.center").click(function() {
       return clickCenter($(this));
     });
-    $("#back-centers").click(function() {
-      $("#systems").hide();
-      $("#centers").show();
-      return $("#tbody-systems").html("");
-    });
     clickSystem = function(a) {
       var system;
       system = a.attr("system-id");
@@ -270,9 +265,19 @@
     $("a.system").click(function() {
       return clickSystem($(this));
     });
-    return $("#back-systems").click(function() {
+    $("#back-centers-systems").click(function() {
       $("#systems").hide();
       $("#centers").show();
+      return $("#tbody-systems").html("");
+    });
+    $("#back-centers-components").click(function() {
+      $("#components").hide();
+      $("#centers").show();
+      return $("#tbody-systems").html("");
+    });
+    return $("#back-systems-components").click(function() {
+      $("#components").hide();
+      $("#systems").show();
       return $("#tbody-systems").html("");
     });
   });
