@@ -1,12 +1,20 @@
 #modal-component.modal.fade.hide
 	.modal-header
+		button.close(data-dismiss='modal') x
 		h3#modal-component-title
 	.modal-body
 		// COMPONENTE
-		p Nombre
-		p Modelo
-		p Vendedor
-		p Número de nodos
+		table.table
+			thead
+			tbody
+				tr
+					td Nombre
+				tr
+					td Modelo
+				tr
+					td Vendedor
+				tr
+					td Número de nodos
 		// PROCESADOR
 		h4 Procesador
 		p Nombre
