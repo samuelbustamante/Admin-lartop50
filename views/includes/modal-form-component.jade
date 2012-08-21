@@ -1,78 +1,78 @@
 #modal-form-component.modal.fade.hide
-  .modal-header
-     button.close(data-dismiss="modal") x
-     h3 Agregar Componente
-   .modal-body
-     form#form-component.form-horizontal(method="POST", action="/components")
-  fieldset
-    input#input-component.hide(type="text", name="cluster")
-    .control-group
-      label.control-label(for="name") Nombre
-      .controls
-   input(type="text", placeholder="Ingrese el nombre", name="name")
-    .control-group
-      label.control-label(for="model") Modelo
-      .controls
-   input(type="text", placeholder="Ingrese el modelo", name="model")
-    .control-group
-      label.control-label(for="vendor") Vendedor
-      .controls
-   input(type="text", placeholder="Ingrese el nombre del vendedor", name="vendor")
-    .control-group
-      label.control-label(for="nodes") Número de nodos
-      .controls
-   input(type="text", placeholder="Ingrese el número de nodos", name="nodes")
-    .control-group
-      label.control-label(for="processor_name") Nombre del procesador
-      .controls
-   input(type="text", placeholder="Ingrese el nombre del procesador", name="processor_name")
-    .control-group
-      label.control-label(for="processor_name") Modelo del procesador
-      .controls
-   input(type="text", placeholder="Ingrese el modelo del procesador", name="processor_model")
-    .control-group
-      label.control-label(for="processor_socket") Socket del procesador
-      .controls
-   input(type="text", placeholder="Ingrese el socket del procesador", name="processor_socket")
-    .control-group
-      label.control-label(for="processor_cores") Nucléos del procesador
-      .controls
-   input(type="text", placeholder="Ingrese el número de cores del procesador", name="processor_cores")
-    .control-group
-      label.control-label(for="processor_speed") Velocidad del procesador
-      .controls
-   input(type="text", placeholder="Ingrese la velocidad de su procesador", name="processor_speed")
-    .control-group
-      label.control-label(for="accelerator_name") Nombre del acelerador
-      .controls
-   input(type="text", placeholder="Ingrese el nombre de su acelerador", name="accelerator_name")
-    .control-group
-      label.control-label(for="accelerator_model") Modelo del acelerador
-      .controls
-   input(type="text", placeholder="Ingrese el modelos de su acelerador", name="accelerator_model")
-    .control-group
-      label.control-label(for="accelerator_number") Número de aceleradores
-      .controls
-   input(type="text", placeholder="Ingrese el número de aceleradores", name="accelerator_number")
-    .control-group
-      label.control-label(for="accelerator_cores") Número de aceleradores
-      .controls
-   input(type="text", placeholder="Ingrese el número de aceleradores", name="accelerator_cores")
-    .control-group
-      label.control-label(for="accelerator_speed") Velocidad del acelerador
-      .controls
-   input(type="text", placeholder="Ingrese la velocidad del acelerador", name="accelerator_speed")
-    .control-group
-      label.control-label(for="primary_operating_system") Sistema operativo
-      .controls
-   input(type="text", placeholder="Ingrese el sistema operativo", name="primary_operating_system")
-    .control-group
-      label.control-label(for="primary_interconection") Interconexión
-      .controls
-   input(type="text", placeholder="Ingrese la interconexión", name="primary_interconection")
-    .control-group
-      label.control-label(for="memory_node") Memoria (MB)
-      .controls
-   input(type="text", placeholder="Ingrese la memoria", name="memory_node")
-   .modal-footer
-     button#button-save-component.btn.btn-primary.save Agregar
+	.modal-header
+		button.close(data-dismiss="modal") x
+		h3 Agregar Componente
+	.modal-body
+		form#form-component.form-horizontal(method="POST", action="/components")
+			fieldset
+				input#input-component.hide(type="text", name="cluster")
+				.control-group
+					label.control-label(for="name") Nombre
+					.controls
+						input(type="text", placeholder="Ingrese el nombre", name="name")
+				.control-group
+					label.control-label(for="model") Modelo
+					.controls
+						input(type="text", placeholder="Ingrese el modelo", name="model")
+				.control-group
+					label.control-label(for="vendor") Vendedor
+					.controls
+						input(type="text", placeholder="Ingrese el nombre del vendedor", name="vendor")
+				.control-group
+					label.control-label(for="nodes") Número de nodos
+					.controls
+						input(type="text", placeholder="Ingrese el número de nodos", name="nodes")
+				.control-group
+					label.control-label(for="processor_name") Nombre del procesador
+					.controls
+						input(type="text", placeholder="Ingrese el nombre del procesador", name="processor_name")
+				.control-group
+					label.control-label(for="processor_name") Modelo del procesador
+					.controls
+						input(type="text", placeholder="Ingrese el modelo del procesador", name="processor_model")
+				.control-group
+					label.control-label(for="processor_socket") Socket del procesador
+					.controls
+						input(type="text", placeholder="Ingrese el socket del procesador", name="processor_socket")
+				.control-group
+					label.control-label(for="processor_cores") Nucléos del procesador
+					.controls
+						input(type="text", placeholder="Ingrese el número de cores del procesador", name="processor_cores")
+				.control-group
+					label.control-label(for="processor_speed") Velocidad del procesador
+					.controls
+						input(type="text", placeholder="Ingrese la velocidad de su procesador", name="processor_speed")
+				.control-group
+					label.control-label(for="accelerator_name") Nombre del acelerador
+					.controls
+						input(type="text", placeholder="Ingrese el nombre de su acelerador", name="accelerator_name")
+				.control-group
+					label.control-label(for="accelerator_model") Modelo del acelerador
+					.controls
+						input(type="text", placeholder="Ingrese el modelos de su acelerador", name="accelerator_model")
+				.control-group
+					label.control-label(for="accelerator_number") Número de aceleradores
+					.controls
+						input(type="text", placeholder="Ingrese el número de aceleradores", name="accelerator_number")
+				.control-group
+					label.control-label(for="accelerator_cores") Número de aceleradores
+					.controls
+						input(type="text", placeholder="Ingrese el número de aceleradores", name="accelerator_cores")
+				.control-group
+					label.control-label(for="accelerator_speed") Velocidad del acelerador
+					.controls
+						input(type="text", placeholder="Ingrese la velocidad del acelerador", name="accelerator_speed")
+				.control-group
+					label.control-label(for="primary_operating_system") Sistema operativo
+					.controls
+						input(type="text", placeholder="Ingrese el sistema operativo", name="primary_operating_system")
+				.control-group
+					label.control-label(for="primary_interconection") Interconexión
+					.controls
+						input(type="text", placeholder="Ingrese la interconexión", name="primary_interconection")
+				.control-group
+					label.control-label(for="memory_node") Memoria (MB)
+					.controls
+						input(type="text", placeholder="Ingrese la memoria", name="memory_node")
+	.modal-footer
+		button#button-save-component.btn.btn-primary.save Agregar

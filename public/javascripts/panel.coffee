@@ -263,7 +263,7 @@ $(document).ready ->
 					data = json.data
 					center_now = $("#center-now").html()
 					$("#system-center-now").html(center_now.replace(' /', ''))
-					$("#system-now").html(" #{data.description.name}")
+					$("#system-now").html(" / #{data.description.name}")
 					for component in data.components
 						$("#tbody-components").append(componentTR(system))
 					$("#systems").hide()
