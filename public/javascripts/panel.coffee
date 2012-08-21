@@ -107,10 +107,10 @@ $(document).ready ->
 					system = data.data
 					$("#tbody-systems").append(systemTR(system))
 					$("#modal-form-system").modal("hide")
-					input-center = $("#input-center").val()
+					input_center = $("#input-center").val()
 					$("#form-system").each ->
 						this.reset()
-					$("#input-center").val(input-center)
+					$("#input-center").val(input_center)
 					button.button("reset")
 				400:(xhr) ->  # invalid parameters
 					data= JSON.parse(xhr.responseText)

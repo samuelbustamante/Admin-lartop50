@@ -97,15 +97,15 @@
         type: $("#form-system").attr("method"),
         statusCode: {
           200: function(data) {
-            var center, system;
+            var input_center, system;
             system = data.data;
             $("#tbody-systems").append(systemTR(system));
             $("#modal-form-system").modal("hide");
-            input - (center = $("#input-center").val());
+            input_center = $("#input-center").val();
             $("#form-system").each(function() {
               return this.reset();
             });
-            $("#input-center").val(input - center);
+            $("#input-center").val(input_center);
             return button.button("reset");
           },
           400: function(xhr) {
