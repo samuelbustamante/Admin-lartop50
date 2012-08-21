@@ -318,6 +318,7 @@ $(document).ready ->
 		$("#components").hide()
 		$("#centers").show()
 		$("#tbody-systems").html("")
+		$("#tbody-components").html("")
 
 	$("#back-systems-components").click ->
 		$("#components").hide()

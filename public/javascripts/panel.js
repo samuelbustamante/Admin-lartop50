@@ -273,7 +273,8 @@
     $("#back-centers-components").click(function() {
       $("#components").hide();
       $("#centers").show();
-      return $("#tbody-systems").html("");
+      $("#tbody-systems").html("");
+      return $("#tbody-components").html("");
     });
     return $("#back-systems-components").click(function() {
       $("#components").hide();
