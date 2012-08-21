@@ -186,11 +186,11 @@
               system = _ref[_i];
               tr = $(systemTR(system));
               tr.find("a.system").each(function() {
-                return a.click(function() {
+                return $(this).click(function() {
                   return clickCenter($(this));
                 });
               });
-              $("#tbody-systems").append();
+              $("#tbody-systems").append(tr);
             }
             $("#centers").hide();
             $("#systems").show();
