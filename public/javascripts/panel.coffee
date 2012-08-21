@@ -215,6 +215,23 @@ $(document).ready ->
 			<td>#{actionsDIV()}</td>
 		</tr>
 		"""
+
+	componentTR = (data) ->
+		"""
+		<tr>
+			<td>
+				<a href="javascript:;" class="component" system-id="#{data.id}">#{data.name}</a>
+			</td>
+			<td>#{data.model}</td>
+			<td>#{data.vendor}</td>
+			<td>
+				<span class="badge badge-info">#{data.nodes}</span>
+			</td>
+			<td>#{data.processor_name}</td>
+			<td>#{actionsDIV()}</td>
+		</tr>
+		"""
+
 	#
 	# CENTERS
 	#
@@ -265,7 +282,7 @@ $(document).ready ->
 					$("#system-center-now").html(center_now.replace(' /', ''))
 					$("#system-now").html(" / #{data.description.name}")
 					for component in data.components
-						$("#tbody-components").append(componentTR(system))
+						$("#tbody-components").append(componentTR(component))
 					$("#systems").hide()
 					$("#components").show()
 					$("#input-system").val(system)

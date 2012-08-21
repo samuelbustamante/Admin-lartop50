@@ -2,7 +2,7 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, centerTR, clickCenter, clickSystem, systemTR;
+    var actionsDIV, centerTR, clickCenter, clickSystem, componentTR, systemTR;
     $("#modal-form-center").modal({
       show: false
     });
@@ -170,6 +170,9 @@
     systemTR = function(data) {
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
+    componentTR = function(data) {
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"component\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.model + "</td>\n	<td>" + data.vendor + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.nodes + "</span>\n	</td>\n	<td>" + data.processor_name + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+    };
     clickCenter = function(a) {
       var center;
       center = a.attr("center-id");
@@ -226,7 +229,7 @@
             _ref = data.components;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               component = _ref[_i];
-              $("#tbody-components").append(componentTR(system));
+              $("#tbody-components").append(componentTR(component));
             }
             $("#systems").hide();
             $("#components").show();
