@@ -1,0 +1,24 @@
+body {
+	background-image: url(http://3bd45b82b0c657f339e9-634522a66d599bb7b55f464d59446966.r46.cf1.rackcdn.com/bg_body.jpg);
+	background-repeat-x: repeat;
+	background-repeat-y: repeat;
+}
+
+.navbar-inner {
+	background-image: url(http://3bd45b82b0c657f339e9-634522a66d599bb7b55f464d59446966.r46.cf1.rackcdn.com/bg_nav.jpg);
+	background-repeat-x: repeat;
+	background-repeat-y: repeat;
+	background-attachment: scroll;
+	background-position-x: 0px;
+	background-position-y: 0px;
+	background-origin: initial;
+	background-clip: initial;
+	background-color: transparent;
+	border-bottom: 1px solid #000000;
+	box-shadow: 0 0 5px #000000;
+}
+
+#panel {
+	background: #FFF;
+	padding: 60px 45px 25px 45px;
+}
