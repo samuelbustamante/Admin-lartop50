@@ -131,7 +131,7 @@ $(document).ready ->
 			statusCode:
 				200: (data) -> # cluster created successful
 					component = data.data
-					$("#tbody-component").append(componentTR(component))
+					$("#tbody-components").append(componentTR(component))
 					$("#modal-form-component").modal("hide")
 					input_system = $("#input-system").val()
 					$("#form-component").each ->
