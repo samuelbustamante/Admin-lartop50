@@ -204,7 +204,7 @@ $(document).ready ->
 		"""
 		<tr>
 			<td>
-				<a href="javascript:;" class="system" center-id="#{data.id}">#{data.name}</a>
+				<a href="javascript:;" class="system" system-id="#{data.id}">#{data.name}</a>
 			</td>
 			<td>
 				<span class="badge badge-info">#{data.status}</span>
@@ -232,7 +232,7 @@ $(document).ready ->
 						tr = $(systemTR(system))
 						tr.find("a.system").each ->
 							$(this).click ->
-								clickCenter($(this))
+								clickSystem($(this))
 						$("#tbody-systems").append(tr)
 					$("#centers").hide()
 					$("#systems").show()

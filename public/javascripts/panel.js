@@ -168,7 +168,7 @@
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.segment + "</span>\n	</td>\n	<td>" + data.country + "</td>\n	<td>" + data.city + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     systemTR = function(data) {
-      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
     clickCenter = function(a) {
       var center;
@@ -187,7 +187,7 @@
               tr = $(systemTR(system));
               tr.find("a.system").each(function() {
                 return $(this).click(function() {
-                  return clickCenter($(this));
+                  return clickSystem($(this));
                 });
               });
               $("#tbody-systems").append(tr);
