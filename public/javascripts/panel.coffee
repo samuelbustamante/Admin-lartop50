@@ -103,7 +103,7 @@ $(document).ready ->
 			statusCode:
 				200:(data) -> # cluster created successful
 					system = data.data
-					tr = systemTR(system)
+					tr = $(systemTR(system))
 
 					tr.find("a.system").each ->
 						$(this).click ->
@@ -137,7 +137,7 @@ $(document).ready ->
 			statusCode:
 				200: (data) -> # cluster created successful
 					component = data.data
-					tr = componentTR(component)
+					tr = $(componentTR(component))
 
 					tr.find("a.component").each ->
 						$(this).click ->

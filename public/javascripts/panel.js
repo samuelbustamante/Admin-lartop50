@@ -99,7 +99,7 @@
           200: function(data) {
             var input_center, system, tr;
             system = data.data;
-            tr = systemTR(system);
+            tr = $(systemTR(system));
             tr.find("a.system").each(function() {
               return $(this).click(function() {
                 return clickSystem($(this));
@@ -139,7 +139,7 @@
           200: function(data) {
             var component, input_system, tr;
             component = data.data;
-            tr = componentTR(component);
+            tr = $(componentTR(component));
             tr.find("a.component").each(function() {
               return $(this).click(function() {
                 return clickComponent($(this));
