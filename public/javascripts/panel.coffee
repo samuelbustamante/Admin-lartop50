@@ -231,9 +231,9 @@ $(document).ready ->
 					for system in data.systems
 						tr = $(systemTR(system))
 						tr.find("a.system").each ->
-							a.click ->
+							$(this).click ->
 								clickCenter($(this))
-						$("#tbody-systems").append()
+						$("#tbody-systems").append(tr)
 					$("#centers").hide()
 					$("#systems").show()
 					$("#input-center").val(center)
