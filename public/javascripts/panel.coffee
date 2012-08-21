@@ -95,9 +95,7 @@ $(document).ready ->
 
 	$("#button-save-system").click ->
 		button = $(this)
-
 		button.button("loading")
-
 		$.ajax
 			data:$("#form-system").serialize()
 			url: $("#form-system").attr("action")
@@ -120,6 +118,35 @@ $(document).ready ->
 		false
 
 	#
+	# FORM COMPONENTS
+	#
+
+	$("#button-save-component").click ->
+		button = $(this)
+		button.button("loading")
+		$.ajax
+			data:$("#form-component").serialize()
+			url: $("#form-component").attr("action")
+			type:$("#form-component").attr("method")
+			statusCode:
+				200: (data) -> # cluster created successful
+					component = data.data
+					$("#tbody-component").append(componentTR(component))
+					$("#modal-form-component").modal("hide")
+					input_system = $("#input-system").val()
+					$("#form-component").each ->
+						this.reset()
+					$("#input-system").val(input_system)
+					button.button("reset")
+
+				400: (xhr) ->  # invalid parameters
+					data= JSON.parse(xhr.responseText)
+				401: (xhr) ->  # not authenticated
+					data= JSON.parse(xhr.responseText)
+				500: (xhr) ->  # internal error
+		false
+
+	#
 	# FORM LINPACK
 	#
 
@@ -135,24 +162,6 @@ $(document).ready ->
 				401:(xhr) ->  # not authenticated
 					data= JSON.parse(xhr.responseText)
 				500:(xhr) -> # internal error
-		false
-
-	#
-	# FORM COMPONENTS
-	#
-
-	$("#button-save-component").click ->
-		$.ajax
-			data:$("#form-component").serialize()
-			url: $("#form-component").attr("action")
-			type:$("#form-component").attr("method")
-			statusCode:
-				200: (data) -> # cluster created successful
-				400: (xhr) ->  # invalid parameters
-					data= JSON.parse(xhr.responseText)
-				401: (xhr) ->  # not authenticated
-					data= JSON.parse(xhr.responseText)
-				500: (xhr) ->  # internal error
 		false
 
 	#

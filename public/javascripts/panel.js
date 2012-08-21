@@ -121,13 +121,27 @@
       });
       return false;
     });
-    $("#button-save-linpack").click(function() {
+    $("#button-save-component").click(function() {
+      var button;
+      button = $(this);
+      button.button("loading");
       $.ajax({
-        data: $("#form-linpack").serialize(),
-        url: $("#form-linpack").attr("action"),
-        type: $("#form-linpack").attr("method"),
+        data: $("#form-component").serialize(),
+        url: $("#form-component").attr("action"),
+        type: $("#form-component").attr("method"),
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            var component, input_system;
+            component = data.data;
+            $("#tbody-component").append(componentTR(component));
+            $("#modal-form-component").modal("hide");
+            input_system = $("#input-system").val();
+            $("#form-component").each(function() {
+              return this.reset();
+            });
+            $("#input-system").val(input_system);
+            return button.button("reset");
+          },
           400: function(xhr) {
             var data;
             return data = JSON.parse(xhr.responseText);
@@ -141,11 +155,11 @@
       });
       return false;
     });
-    $("#button-save-component").click(function() {
+    $("#button-save-linpack").click(function() {
       $.ajax({
-        data: $("#form-component").serialize(),
-        url: $("#form-component").attr("action"),
-        type: $("#form-component").attr("method"),
+        data: $("#form-linpack").serialize(),
+        url: $("#form-linpack").attr("action"),
+        type: $("#form-linpack").attr("method"),
         statusCode: {
           200: function(data) {},
           400: function(xhr) {
