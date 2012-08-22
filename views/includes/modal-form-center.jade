@@ -1,31 +1,31 @@
 #modal-form-center.modal.fade.hide
 	.modal-header
-		button.close(data-dismiss='modal') x
+		button.close(data-dismiss="modal") x
 		h3 Crear centro
 	.modal-body
-		form#form-center.form-horizontal(method='POST', action='/api/submissions/centers')
+		form#form-center.form-horizontal(method="POST", action="/api/submissions/centers")
 			fieldset
 				.control-group
-					label.control-label(for='name') Nombre
+					label.control-label(for="name") Nombre
 					.controls
-						input.input-xlarge(type='text', placeholder='Ingrese el nombre del centro', name='name')
+						input.input-xlarge(type="text", placeholder="Ingrese el nombre del centro", name="name")
 				.control-group
-					label.control-label(for='acronym') Siglas
+					label.control-label(for="acronym") Siglas
 					.controls
-						input.input-xlarge(type='text', placeholder='Ingrese las siglas del centro', name='acronym')
+						input.input-xlarge(type="text", placeholder="Ingrese las siglas del centro", name="acronym")
 				.control-group
-					label.control-label(for='segment') Segmento
+					label.control-label(for="segment") Segmento
 					.controls
-						select.input-xlarge(name='segment')
+						select.input-xlarge(name="segment")
 							option(value="Académico") Académico
 							option(value="Investigación") Investigación
 							option(value="Gubernamental") Gubernamental
 							option(value="Industrial") Industrial
 							option(value="Otro") Otro
 				.control-group
-					label.control-label(for='contry') Pais
+					label.control-label(for="contry") Pais
 					.controls
-						select.input-xlarge(name='country')
+						select.input-xlarge(name="country")
 							option Argentina
 							option Bolivia
 							option Brasil
@@ -47,16 +47,16 @@
 							option Uruguay
 							option Venezuela
 				.control-group
-					label.control-label(for='city') Ciudad
+					label.control-label(for="city") Ciudad
 					.controls
-						input.input-xlarge(type='text', placeholder='Ingrese la ciudad del centro', name='city')
+						input.input-xlarge(type="text", placeholder="Ingrese la ciudad del centro", name="city")
 				.control-group
-					label.control-label(for='url') Sitio web
+					label.control-label(for="url") Sitio web
 					.controls
-						input.input-xlarge(type='text', placeholder='Ingrese el sitio web del centro', name='url')
+						input.input-xlarge(type="text", placeholder="Ingrese el sitio web del centro", name="url")
 				.control-group
-					label.control-label(for='description') Descripción
+					label.control-label(for="description") Descripción
 					.controls
-						textarea.input-xlarge(placeholder='Ingrse una breve descripción del centro', name='description', rows="4")
-	 .modal-footer
-		 button#button-save-center.btn.btn-primary.save(data-loading-text="Creando ...", autocomplete="off") Crear
+						textarea.input-xlarge(placeholder="Ingrese una breve descripción del centro", name="description", rows="4")
+	.modal-footer
+		button#button-save-center.btn.btn-primary.save(data-loading-text="Creando ...", autocomplete="off") Crear
