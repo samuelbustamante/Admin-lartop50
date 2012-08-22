@@ -175,7 +175,7 @@
             _ref = data.errors;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
-              $("#ctrl-components-" + error.param).addClass("warning");
+              $("#ctrl-component-" + error.param).addClass("warning");
             }
             return button.button("reset");
           },

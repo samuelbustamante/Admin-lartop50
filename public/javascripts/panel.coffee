@@ -165,7 +165,7 @@ $(document).ready ->
 					data= JSON.parse(xhr.responseText)
 
 					for error in data.errors
-						$("#ctrl-components-#{error.param}").addClass("warning")
+						$("#ctrl-component-#{error.param}").addClass("warning")
 
 					button.button("reset")
 
