@@ -6,27 +6,27 @@
 		form#form-system.form-horizontal(method="POST", action="/api/submissions/systems")
 			fieldset
 				input#input-center.hide(type="text", name="center")
-				.control-group
+				.control-group#ctrl-system-name
 					label.control-label(for="name") Nombre
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el nombre del equipo", name="name")
-				.control-group
+				.control-group#ctrl-system-status
 					label.control-label(for="status") Estado
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el estado del equipo", name="status")
-				.control-group
+				.control-group#ctrl-system-area
 					label.control-label(for="area") Area de aplicación
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el area de aplicación del equipo", name="area")
-				.control-group
+				.control-group#ctrl-system-description
 					label.control-label(for="description") Descripción
 					.controls
 						textarea.input-xlarge(placeholder="Ingrese una breve descripción del equipo", name="description", rows="4")
-				.control-group
-					label.control-label(for="description") Vendedor
+				.control-group#ctrl-system-vendor
+					label.control-label(for="vendor") Vendedor
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el vendedor del equipo", name="vendor")
-				.control-group
+				.control-group#ctrl-system-instalation
 					label.control-label(for="instalation") Año de instalación
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el año de instalación del equipo", name="installation")

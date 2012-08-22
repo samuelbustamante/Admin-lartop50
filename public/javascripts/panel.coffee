@@ -86,6 +86,12 @@ $(document).ready ->
 					success = true
 				400:(xhr) ->  # INVALID PARAMETERS
 					data= JSON.parse(xhr.responseText)
+
+					for error in data.errors
+						$("#ctrl-center-#{error.param}").addClass("warning")
+
+					button.button("reset")
+
 				401:(xhr) ->  # NOT AUTHENTICATED
 					data= JSON.parse(xhr.responseText)
 				500:(xhr) ->  # INTERNAL ERROR
@@ -118,6 +124,12 @@ $(document).ready ->
 					button.button("reset")
 				400:(xhr) ->  # invalid parameters
 					data= JSON.parse(xhr.responseText)
+
+					for error in data.errors
+						$("#ctrl-system-#{error.param}").addClass("warning")
+
+					button.button("reset")
+
 				401:(xhr) ->  # not authenticated
 					data= JSON.parse(xhr.responseText)
 				500:(xhr) ->  # internal error
@@ -151,6 +163,12 @@ $(document).ready ->
 
 				400: (xhr) ->  # invalid parameters
 					data= JSON.parse(xhr.responseText)
+
+					for error in data.errors
+						$("#ctrl-components-#{error.param}").addClass("warning")
+
+					button.button("reset")
+
 				401: (xhr) ->  # not authenticated
 					data= JSON.parse(xhr.responseText)
 				500: (xhr) ->  # internal error

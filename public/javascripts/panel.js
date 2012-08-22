@@ -78,8 +78,14 @@
             return success = true;
           },
           400: function(xhr) {
-            var data;
-            return data = JSON.parse(xhr.responseText);
+            var data, error, _i, _len, _ref;
+            data = JSON.parse(xhr.responseText);
+            _ref = data.errors;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              error = _ref[_i];
+              $("#ctrl-center-" + error.param).addClass("warning");
+            }
+            return button.button("reset");
           },
           401: function(xhr) {
             var data;
@@ -118,8 +124,14 @@
             return button.button("reset");
           },
           400: function(xhr) {
-            var data;
-            return data = JSON.parse(xhr.responseText);
+            var data, error, _i, _len, _ref;
+            data = JSON.parse(xhr.responseText);
+            _ref = data.errors;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              error = _ref[_i];
+              $("#ctrl-system-" + error.param).addClass("warning");
+            }
+            return button.button("reset");
           },
           401: function(xhr) {
             var data;
@@ -158,8 +170,14 @@
             return button.button("reset");
           },
           400: function(xhr) {
-            var data;
-            return data = JSON.parse(xhr.responseText);
+            var data, error, _i, _len, _ref;
+            data = JSON.parse(xhr.responseText);
+            _ref = data.errors;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              error = _ref[_i];
+              $("#ctrl-components-" + error.param).addClass("warning");
+            }
+            return button.button("reset");
           },
           401: function(xhr) {
             var data;

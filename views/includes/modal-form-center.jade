@@ -5,15 +5,15 @@
 	.modal-body
 		form#form-center.form-horizontal(method="POST", action="/api/submissions/centers")
 			fieldset
-				.control-group
+				.control-group#ctrl-center-name
 					label.control-label(for="name") Nombre
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el nombre del centro", name="name")
-				.control-group
+				.control-group#ctrl-center-acronym
 					label.control-label(for="acronym") Siglas
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese las siglas del centro", name="acronym")
-				.control-group
+				.control-group#ctrl-center-segment
 					label.control-label(for="segment") Segmento
 					.controls
 						select.input-xlarge(name="segment")
@@ -22,7 +22,7 @@
 							option(value="Gubernamental") Gubernamental
 							option(value="Industrial") Industrial
 							option(value="Otro") Otro
-				.control-group
+				.control-group#ctrl-center-country
 					label.control-label(for="contry") Pais
 					.controls
 						select.input-xlarge(name="country")
@@ -46,15 +46,15 @@
 							option República Dominicana
 							option Uruguay
 							option Venezuela
-				.control-group
+				.control-group#ctrl-center-city
 					label.control-label(for="city") Ciudad
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese la ciudad del centro", name="city")
-				.control-group
+				.control-group#ctrl-center-url
 					label.control-label(for="url") Sitio web
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el sitio web del centro", name="url")
-				.control-group
+				.control-group#ctrl-center-description
 					label.control-label(for="description") Descripción
 					.controls
 						textarea.input-xlarge(placeholder="Ingrese una breve descripción del centro", name="description", rows="4")
