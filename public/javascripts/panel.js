@@ -30,6 +30,14 @@
     $("#button-new-component").click(function() {
       return $("#modal-form-component").modal("show");
     });
+    $("#modal-form-center").on("hidden", function() {
+      $(this).each(function() {
+        return this.reset();
+      });
+      return $(this).find(".warning").each(function() {
+        return $(this).removeClass("warning");
+      });
+    });
     $("#button-save-center").button();
     $("#logout").click(function() {
       $.ajax({

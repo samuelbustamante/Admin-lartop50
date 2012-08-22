@@ -32,6 +32,16 @@ $(document).ready ->
 	$("#button-new-component").click ->
 		$("#modal-form-component").modal("show")
 
+	# EVENT HIDEN
+
+	$("#modal-form-center").on "hidden", ->
+		$(this).each ->
+			this.reset()
+
+		$(this).find(".warning").each ->
+			$(this).removeClass("warning")
+
+
 	#
 	# BUTTONS
 	#
