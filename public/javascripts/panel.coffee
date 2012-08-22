@@ -35,7 +35,7 @@ $(document).ready ->
 	# EVENT HIDEN
 
 	$("#modal-form-center").on "hidden", ->
-		$(this).each ->
+		$(this).find("form").each ->
 			this.reset()
 
 		$(this).find(".warning").each ->

@@ -31,7 +31,7 @@
       return $("#modal-form-component").modal("show");
     });
     $("#modal-form-center").on("hidden", function() {
-      $(this).each(function() {
+      $(this).find("form").each(function() {
         return this.reset();
       });
       return $(this).find(".warning").each(function() {
