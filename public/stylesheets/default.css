@@ -22,3 +22,9 @@ body {
 	background: #FFF;
 	padding: 60px 45px 25px 45px;
 }
+
+legend {
+	width: 96%;
+	padding: 0 2%;
+	background: #EEE;
+}
