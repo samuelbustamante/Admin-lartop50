@@ -24,18 +24,6 @@
 					label.control-label(for="nodes") Número de nodos
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el número de nodos del componente", name="nodes")
-				.control-group
-					label.control-label(for="primary_operating_system") Sistema operativo
-					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese el sistema operativo del components", name="primary_operating_system")
-				.control-group
-					label.control-label(for="primary_interconection") Interconexión
-					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese la interconexión del componente", name="primary_interconection")
-				.control-group
-					label.control-label(for="memory_node") Memoria (en MB)
-					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese la memoria del componente", name="memory_node")
 
 				// PROCESADOR
 				legend Procesador
@@ -82,5 +70,32 @@
 					label.control-label(for="accelerator_speed") Velocidad
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese la velocidad del acelerador", name="accelerator_speed")
+
+				// POWER
+				legend Energía
+				.control-group
+					label.control-label(for="peak_power") Potencia pico (kW)
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese la potencia pico del nodo"
+				.control-group
+					label.control-label(for="measured_power") Potencia media (kW)
+					.controls
+						input.input-xlarge(type="text", pleaceholder="Ingrese la potencia media del nodo")
+
+				// CONFIG
+				legend Configuración
+				.control-group
+					label.control-label(for="primary_operating_system") Sistema operativo
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese el sistema operativo del components", name="primary_operating_system")
+				.control-group
+					label.control-label(for="primary_interconection") Interconexión
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese la interconexión del componente", name="primary_interconection")
+				.control-group
+					label.control-label(for="memory_node") Memoria (en MB)
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese la memoria del componente", name="memory_node")
+
 	.modal-footer
 		button#button-save-component.btn.btn-primary.save(data-loading-text="Agregando ...", autocomplete="off") Agregar
