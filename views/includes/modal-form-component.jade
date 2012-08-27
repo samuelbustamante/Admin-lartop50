@@ -31,8 +31,8 @@
 					label.control-label(for="processor_name") Nombre
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el nombre del procesador", name="processor_name")
-				.control-group#ctrl-component-processor_name
-					label.control-label(for="processor_name") Modelo
+				.control-group#ctrl-component-processor_model
+					label.control-label(for="processor_model") Modelo
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el modelo del procesador", name="processor_model")
 				.control-group#ctrl-component-processor_socket
@@ -44,7 +44,7 @@
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el número de cores del procesador", name="processor_cores")
 				.control-group#ctrl-component-processor_speed
-					label.control-label(for="processor_speed") Velocidad (en GHz)
+					label.control-label(for="processor_speed") Velocidad (en Ghz)
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese la velocidad del procesador", name="processor_speed")
 
@@ -67,7 +67,7 @@
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese el número de cores del acelerador", name="accelerator_cores")
 				.control-group#ctrl-component-accelerator_speed
-					label.control-label(for="accelerator_speed") Velocidad
+					label.control-label(for="accelerator_speed") Velocidad (Ghz)
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese la velocidad del acelerador", name="accelerator_speed")
 
@@ -76,24 +76,24 @@
 				.control-group#ctrl-component-peak_power
 					label.control-label(for="peak_power") Potencia pico (kW)
 					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese la potencia pico del nodo")
+						input.input-xlarge(type="text", placeholder="Ingrese la potencia pico del nodo", name="peak_power")
 				.control-group#ctrl-component-measured_power
 					label.control-label(for="measured_power") Potencia media (kW)
 					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese la potencia media del nodo")
+						input.input-xlarge(type="text", placeholder="Ingrese la potencia media del nodo", name="measured_power")
 
 				// CONFIG
 				legend Configuración
-				.control-group#ctrl-component-primary_operating_system
-					label.control-label(for="primary_operating_system") Sistema operativo
+				.control-group#ctrl-component-operating_system
+					label.control-label(for="operating_system") Sistema operativo
 					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese el sistema operativo del components", name="primary_operating_system")
-				.control-group#ctrl-component-primary_interconection
-					label.control-label(for="primary_interconection") Interconexión
+						input.input-xlarge(type="text", placeholder="Ingrese el sistema operativo del components", name="operating_system")
+				.control-group#ctrl-component-interconection
+					label.control-label(for="interconection") Interconexión
 					.controls
-						input.input-xlarge(type="text", placeholder="Ingrese la interconexión del componente", name="primary_interconection")
+						input.input-xlarge(type="text", placeholder="Ingrese la interconexión del componente", name="interconection")
 				.control-group#ctrl-component-memory_node
-					label.control-label(for="memory_node") Memoria (en MB)
+					label.control-label(for="memory_node") Memoria (en GB)
 					.controls
 						input.input-xlarge(type="text", placeholder="Ingrese la memoria del componente", name="memory_node")
 

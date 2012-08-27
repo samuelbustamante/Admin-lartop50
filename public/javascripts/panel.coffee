@@ -1,24 +1,22 @@
 $(document).ready ->
 
-	#
+	# APPS
+
+	apps = [
+		"center"
+		"system"
+		"component"
+	]
+
 	# MODALS
-	#
 
-	$("#modal-form-center").modal
-		show:false
+	for app in apps
 
-	$("#modal-form-system").modal
-		show:false
+		# CREATE MODAL
+		$("#modal-form-#{app}").modal
+			show: false
 
-	$("#modal-form-linpack").modal
-		show:false
-
-	$("#modal-form-component").modal
-		show:false
-
-	$("#modal-component").modal
-		show:false
-	#
+	# SHOW MODAL
 
 	$("#button-new-center").click ->
 		$("#modal-form-center").modal("show")
@@ -32,25 +30,41 @@ $(document).ready ->
 	$("#button-new-component").click ->
 		$("#modal-form-component").modal("show")
 
+	#
+
+	resetErrors = (form) ->
+		form.find(".warning").each ->	$(this).removeClass("warning")
+		form.find(".help-inline").each -> $(this).remove()
+
+	resetForm = (app) ->
+		form = $("#form-#{app}")
+		form.each -> this.reset()
+		resetErrors(form)
+
+	setErrors = (data, app) ->
+		param = ""
+		for error in data.errors
+			if param != error.param
+				$("#ctrl-#{app}-#{error.param}").addClass("warning")
+				$("#ctrl-#{app}-#{error.param} .controls").append("<span class=\"help-inline\">#{error.msg}</span>")
+			param = error.param
+
 	# EVENT HIDEN
 
 	$("#modal-form-center").on "hidden", ->
-		$(this).find("form").each ->
-			this.reset()
+		resetForm("center")
 
-		$(this).find(".warning").each ->
-			$(this).removeClass("warning")
+	$("#modal-form-system").on "hidden", ->
+		resetForm("system")
 
+	$("#modal-form-component").on "hidden", ->
+		resetForm("component")
 
-	#
 	# BUTTONS
-	#
 
 	$("#button-save-center").button()
 
-	#
 	# LOGOUT
-	#
 
 	$("#logout").click ->
 
@@ -66,11 +80,12 @@ $(document).ready ->
 					alert(data.message)
 		true
 
-	#
 	# FORM CENTER
-	#
 	
 	$("#button-save-center").click ->
+		app = "center"
+		form = $("#form-#{app}")
+		resetErrors(form)
 		success = false
 		button = $(this)
 		button.button("loading")
@@ -95,11 +110,7 @@ $(document).ready ->
 					button.button("reset")
 					success = true
 				400:(xhr) ->  # INVALID PARAMETERS
-					data= JSON.parse(xhr.responseText)
-
-					for error in data.errors
-						$("#ctrl-center-#{error.param}").addClass("warning")
-
+					setErrors(JSON.parse(xhr.responseText), app)
 					button.button("reset")
 
 				401:(xhr) ->  # NOT AUTHENTICATED
@@ -107,11 +118,12 @@ $(document).ready ->
 				500:(xhr) ->  # INTERNAL ERROR
 		success
 
-	#
 	# FORM SYSTEM
-	#
 
 	$("#button-save-system").click ->
+		app = "system"
+		form = $("#form-#{app}")
+		resetErrors(form)
 		button = $(this)
 		button.button("loading")
 		$.ajax
@@ -133,11 +145,7 @@ $(document).ready ->
 					$("#input-center").val(input_center)
 					button.button("reset")
 				400:(xhr) ->  # invalid parameters
-					data= JSON.parse(xhr.responseText)
-
-					for error in data.errors
-						$("#ctrl-system-#{error.param}").addClass("warning")
-
+					setErrors(JSON.parse(xhr.responseText), app)
 					button.button("reset")
 
 				401:(xhr) ->  # not authenticated
@@ -145,11 +153,12 @@ $(document).ready ->
 				500:(xhr) ->  # internal error
 		false
 
-	#
 	# FORM COMPONENTS
-	#
 
 	$("#button-save-component").click ->
+		app = "component"
+		form = $("#form-#{app}")
+		resetErrors(form)
 		button = $(this)
 		button.button("loading")
 		$.ajax
@@ -172,11 +181,7 @@ $(document).ready ->
 					button.button("reset")
 
 				400: (xhr) ->  # invalid parameters
-					data= JSON.parse(xhr.responseText)
-
-					for error in data.errors
-						$("#ctrl-component-#{error.param}").addClass("warning")
-
+					setErrors(JSON.parse(xhr.responseText), app)
 					button.button("reset")
 
 				401: (xhr) ->  # not authenticated
@@ -184,9 +189,7 @@ $(document).ready ->
 				500: (xhr) ->  # internal error
 		false
 
-	#
 	# FORM LINPACK
-	#
 
 	$("#button-save-linpack").click ->
 		$.ajax
@@ -202,9 +205,90 @@ $(document).ready ->
 				500:(xhr) -> # internal error
 		false
 
-	#
 	# CENTER
-	#
+
+	clickCenter = (a) ->
+		center = a.attr("center-id")
+		$.ajax
+			url : "/api/submissions/centers/#{center}"
+			type: "GET"
+			statusCode:
+				200: (json) ->
+					data = json.data
+					$("#center-now").html(" / #{data.description.acronym}")
+					for system in data.systems
+						tr = $(systemTR(system))
+						tr.find("a.system").each ->
+							$(this).click ->
+								clickSystem($(this))
+						$("#tbody-systems").append(tr)
+					$("#centers").hide()
+					$("#systems").show()
+					$("#input-center").val(center)
+				404: (xhr) ->
+				500: (xhr) ->
+		false
+
+	$("a.center").click ->
+		clickCenter($(this))
+
+	# SYSTEMS
+
+	clickSystem = (a)->
+		system = a.attr("system-id")
+		$.ajax
+			url: "/api/submissions/systems/#{system}"
+			type: "GET"
+			statusCode:
+				200: (json)->
+					data = json.data
+					center_now = $("#center-now").html()
+					$("#back-systems-components").html(center_now.replace(" /", ""))
+					$("#system-now").html(" / #{data.description.name}")
+
+					for component in data.components
+						tr = $(componentTR(component))
+						tr.find("a.component").each ->
+							$(this).click ->
+								clickComponent($(this))
+						$("#tbody-components").append(tr)
+
+					$("#systems").hide()
+					$("#components").show()
+					$("#input-system").val(system)
+				404: (xhr)->
+				500: (xhr)->
+		false
+
+	$("a.system").click ->
+		clickSystem($(this))
+
+	$("#back-centers-systems").click ->
+		$("#systems").hide()
+		$("#centers").show()
+		$("#tbody-systems").html("")
+
+	# COMPONENTS
+
+	clickComponent = (a)->
+		system = a.attr("component-id")
+		$("#modal-component-title").html(a.html())
+		$("#modal-component").modal("show")
+
+	$("a.component").click ->
+		clickComponent($(this))
+
+	$("#back-centers-components").click ->
+		$("#components").hide()
+		$("#centers").show()
+		$("#tbody-systems").html("")
+		$("#tbody-components").html("")
+
+	$("#back-systems-components").click ->
+		$("#components").hide()
+		$("#systems").show()
+		$("#tbody-components").html("")
+
 
 	actionsDIV = ->
 		"""
@@ -278,113 +362,3 @@ $(document).ready ->
 			<td>#{actionsDIV()}</td>
 		</tr>
 		"""
-
-	#
-	# CENTERS
-	#
-
-	clickCenter = (a)->
-		center = a.attr("center-id")
-		$.ajax
-			url : "/api/submissions/centers/#{center}"
-			type: "GET"
-			statusCode:
-				200: (json) ->
-					data = json.data
-					$("#center-now").html(" / #{data.description.acronym}")
-					for system in data.systems
-						tr = $(systemTR(system))
-						tr.find("a.system").each ->
-							$(this).click ->
-								clickSystem($(this))
-						$("#tbody-systems").append(tr)
-					$("#centers").hide()
-					$("#systems").show()
-					$("#input-center").val(center)
-				404: (xhr) ->
-				500: (xhr) ->
-		false
-
-	$("a.center").click ->
-		clickCenter($(this))
-
-	#
-	# SYSTEMS
-	#
-
-	clickSystem = (a)->
-		system = a.attr("system-id")
-		$.ajax
-			url : "/api/submissions/systems/#{system}"
-			type: "GET"
-			statusCode:
-				200: (json) ->
-					data = json.data
-					center_now = $("#center-now").html()
-					$("#back-systems-components").html(center_now.replace(' /', ''))
-					$("#system-now").html(" / #{data.description.name}")
-					for component in data.components
-
-						tr = $(componentTR(component))
-						tr.find("a.component").each ->
-							$(this).click ->
-								clickComponent($(this))
-						$("#tbody-components").append(tr)
-
-					$("#systems").hide()
-					$("#components").show()
-					$("#input-system").val(system)
-				404: (xhr) ->
-				500: (xhr) ->
-		false
-
-	$("a.system").click ->
-		clickSystem($(this))
-
-	$("#back-centers-systems").click ->
-		$("#systems").hide()
-		$("#centers").show()
-		$("#tbody-systems").html("")
-
-	#
-	# COMPONENTS
-	#
-
-	clickComponent = (a)->
-		system = a.attr("component-id")
-		###
-		$.ajax
-			url : "/api/submissions/component/#{component}"
-			type: "GET"
-			statusCode:
-				200: (json) ->
-					data = json.data
-					center_now = $("#center-now").html()
-					$("#back-systems-components").html(center_now.replace(' /', ''))
-					$("#system-now").html(" / #{data.description.name}")
-					for component in data.components
-						$("#tbody-components").append(componentTR(component))
-					$("#systems").hide()
-					$("#components").show()
-					$("#input-system").val(system)
-				404: (xhr) ->
-				500: (xhr) ->
-		false
-		###
-		$("#modal-component-title").html(a.html())
-		$("#modal-component").modal("show")
-
-	$("a.component").click ->
-		clickComponent($(this))
-
-	$("#back-centers-components").click ->
-		$("#components").hide()
-		$("#centers").show()
-		$("#tbody-systems").html("")
-		$("#tbody-components").html("")
-
-	$("#back-systems-components").click ->
-		$("#components").hide()
-		$("#systems").show()
-		$("#tbody-components").html("")
-

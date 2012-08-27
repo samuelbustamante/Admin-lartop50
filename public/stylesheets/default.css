@@ -28,3 +28,11 @@ legend {
 	padding: 0 2%;
 	background: #EEE;
 }
+
+.help-inline {
+	margin-top: 5px;
+}
+
+.control-group.warning {
+	margin-bottom: 10px;
+}

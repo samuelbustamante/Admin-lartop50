@@ -2,22 +2,14 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, centerTR, clickCenter, clickComponent, clickSystem, componentTR, systemTR;
-    $("#modal-form-center").modal({
-      show: false
-    });
-    $("#modal-form-system").modal({
-      show: false
-    });
-    $("#modal-form-linpack").modal({
-      show: false
-    });
-    $("#modal-form-component").modal({
-      show: false
-    });
-    $("#modal-component").modal({
-      show: false
-    });
+    var actionsDIV, app, apps, centerTR, clickCenter, clickComponent, clickSystem, componentTR, resetErrors, resetForm, setErrors, systemTR, _i, _len;
+    apps = ["center", "system", "component"];
+    for (_i = 0, _len = apps.length; _i < _len; _i++) {
+      app = apps[_i];
+      $("#modal-form-" + app).modal({
+        show: false
+      });
+    }
     $("#button-new-center").click(function() {
       return $("#modal-form-center").modal("show");
     });
@@ -30,13 +22,45 @@
     $("#button-new-component").click(function() {
       return $("#modal-form-component").modal("show");
     });
-    $("#modal-form-center").on("hidden", function() {
-      $(this).find("form").each(function() {
-        return this.reset();
-      });
-      return $(this).find(".warning").each(function() {
+    resetErrors = function(form) {
+      form.find(".warning").each(function() {
         return $(this).removeClass("warning");
       });
+      return form.find(".help-inline").each(function() {
+        return $(this).remove();
+      });
+    };
+    resetForm = function(app) {
+      var form;
+      form = $("#form-" + app);
+      form.each(function() {
+        return this.reset();
+      });
+      return resetErrors(form);
+    };
+    setErrors = function(data, app) {
+      var error, param, _j, _len1, _ref, _results;
+      param = "";
+      _ref = data.errors;
+      _results = [];
+      for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+        error = _ref[_j];
+        if (param !== error.param) {
+          $("#ctrl-" + app + "-" + error.param).addClass("warning");
+          $("#ctrl-" + app + "-" + error.param + " .controls").append("<span class=\"help-inline\">" + error.msg + "</span>");
+        }
+        _results.push(param = error.param);
+      }
+      return _results;
+    };
+    $("#modal-form-center").on("hidden", function() {
+      return resetForm("center");
+    });
+    $("#modal-form-system").on("hidden", function() {
+      return resetForm("system");
+    });
+    $("#modal-form-component").on("hidden", function() {
+      return resetForm("component");
     });
     $("#button-save-center").button();
     $("#logout").click(function() {
@@ -57,7 +81,10 @@
       return true;
     });
     $("#button-save-center").click(function() {
-      var button, success;
+      var button, form, success;
+      app = "center";
+      form = $("#form-" + app);
+      resetErrors(form);
       success = false;
       button = $(this);
       button.button("loading");
@@ -86,13 +113,7 @@
             return success = true;
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref;
-            data = JSON.parse(xhr.responseText);
-            _ref = data.errors;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              error = _ref[_i];
-              $("#ctrl-center-" + error.param).addClass("warning");
-            }
+            setErrors(JSON.parse(xhr.responseText), app);
             return button.button("reset");
           },
           401: function(xhr) {
@@ -105,7 +126,10 @@
       return success;
     });
     $("#button-save-system").click(function() {
-      var button;
+      var button, form;
+      app = "system";
+      form = $("#form-" + app);
+      resetErrors(form);
       button = $(this);
       button.button("loading");
       $.ajax({
@@ -132,13 +156,7 @@
             return button.button("reset");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref;
-            data = JSON.parse(xhr.responseText);
-            _ref = data.errors;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              error = _ref[_i];
-              $("#ctrl-system-" + error.param).addClass("warning");
-            }
+            setErrors(JSON.parse(xhr.responseText), app);
             return button.button("reset");
           },
           401: function(xhr) {
@@ -151,7 +169,10 @@
       return false;
     });
     $("#button-save-component").click(function() {
-      var button;
+      var button, form;
+      app = "component";
+      form = $("#form-" + app);
+      resetErrors(form);
       button = $(this);
       button.button("loading");
       $.ajax({
@@ -178,13 +199,7 @@
             return button.button("reset");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref;
-            data = JSON.parse(xhr.responseText);
-            _ref = data.errors;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              error = _ref[_i];
-              $("#ctrl-component-" + error.param).addClass("warning");
-            }
+            setErrors(JSON.parse(xhr.responseText), app);
             return button.button("reset");
           },
           401: function(xhr) {
@@ -216,18 +231,6 @@
       });
       return false;
     });
-    actionsDIV = function() {
-      return "<div class=\"btn-group\">\n	<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n	<span class=\"caret\">\n		<ul class=\"dropdown-menu\">\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-pencil\">\n						<span> Editar</span>\n					</i>\n				</a>\n			</li>\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-remove\">\n						<span> Eliminar</span>\n					</i>\n				</a>\n			</li>\n		</ul>\n	</span>\n</div>";
-    };
-    centerTR = function(data) {
-      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.segment + "</span>\n	</td>\n	<td>" + data.country + "</td>\n	<td>" + data.city + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
-    };
-    systemTR = function(data) {
-      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
-    };
-    componentTR = function(data) {
-      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"component\" component-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.model + "</td>\n	<td>" + data.vendor + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.nodes + "</span>\n	</td>\n	<td>" + data.processor_name + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
-    };
     clickCenter = function(a) {
       var center;
       center = a.attr("center-id");
@@ -236,12 +239,12 @@
         type: "GET",
         statusCode: {
           200: function(json) {
-            var data, system, tr, _i, _len, _ref;
+            var data, system, tr, _j, _len1, _ref;
             data = json.data;
             $("#center-now").html(" / " + data.description.acronym);
             _ref = data.systems;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              system = _ref[_i];
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              system = _ref[_j];
               tr = $(systemTR(system));
               tr.find("a.system").each(function() {
                 return $(this).click(function() {
@@ -271,14 +274,14 @@
         type: "GET",
         statusCode: {
           200: function(json) {
-            var center_now, component, data, tr, _i, _len, _ref;
+            var center_now, component, data, tr, _j, _len1, _ref;
             data = json.data;
             center_now = $("#center-now").html();
-            $("#back-systems-components").html(center_now.replace(' /', ''));
+            $("#back-systems-components").html(center_now.replace(" /", ""));
             $("#system-now").html(" / " + data.description.name);
             _ref = data.components;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              component = _ref[_i];
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              component = _ref[_j];
               tr = $(componentTR(component));
               tr.find("a.component").each(function() {
                 return $(this).click(function() {
@@ -308,26 +311,6 @@
     clickComponent = function(a) {
       var system;
       system = a.attr("component-id");
-      /*
-      		$.ajax
-      			url : "/api/submissions/component/#{component}"
-      			type: "GET"
-      			statusCode:
-      				200: (json) ->
-      					data = json.data
-      					center_now = $("#center-now").html()
-      					$("#back-systems-components").html(center_now.replace(' /', ''))
-      					$("#system-now").html(" / #{data.description.name}")
-      					for component in data.components
-      						$("#tbody-components").append(componentTR(component))
-      					$("#systems").hide()
-      					$("#components").show()
-      					$("#input-system").val(system)
-      				404: (xhr) ->
-      				500: (xhr) ->
-      		false
-      */
-
       $("#modal-component-title").html(a.html());
       return $("#modal-component").modal("show");
     };
@@ -340,11 +323,23 @@
       $("#tbody-systems").html("");
       return $("#tbody-components").html("");
     });
-    return $("#back-systems-components").click(function() {
+    $("#back-systems-components").click(function() {
       $("#components").hide();
       $("#systems").show();
       return $("#tbody-components").html("");
     });
+    actionsDIV = function() {
+      return "<div class=\"btn-group\">\n	<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n	<span class=\"caret\">\n		<ul class=\"dropdown-menu\">\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-pencil\">\n						<span> Editar</span>\n					</i>\n				</a>\n			</li>\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-remove\">\n						<span> Eliminar</span>\n					</i>\n				</a>\n			</li>\n		</ul>\n	</span>\n</div>";
+    };
+    centerTR = function(data) {
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"center\" center-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.acronym + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.segment + "</span>\n	</td>\n	<td>" + data.country + "</td>\n	<td>" + data.city + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+    };
+    systemTR = function(data) {
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+    };
+    return componentTR = function(data) {
+      return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"component\" component-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.model + "</td>\n	<td>" + data.vendor + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.nodes + "</span>\n	</td>\n	<td>" + data.processor_name + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+    };
   });
 
 }).call(this);
