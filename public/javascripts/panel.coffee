@@ -24,13 +24,13 @@ $(document).ready ->
 	$("#button-new-system").click ->
 		$("#modal-form-system").modal("show")
 
-	$("#button-new-linpack").click ->
+	$("#button-add-linpack").click ->
 		$("#modal-form-linpack").modal("show")
 
 	$("#button-new-component").click ->
 		$("#modal-form-component").modal("show")
 
-	#
+	# GENERAL
 
 	resetErrors = (form) ->
 		form.find(".warning").each ->	$(this).removeClass("warning")
@@ -49,6 +49,9 @@ $(document).ready ->
 				$("#ctrl-#{app}-#{error.param} .controls").append("<span class=\"help-inline\">#{error.msg}</span>")
 			param = error.param
 
+	notLogin = ->
+		$(location).attr("href","/ingresar") #REDIRECT	
+
 	# EVENT HIDEN
 
 	$("#modal-form-center").on "hidden", ->
@@ -59,6 +62,9 @@ $(document).ready ->
 
 	$("#modal-form-component").on "hidden", ->
 		resetForm("component")
+
+	$("#modal-form-linpack").on "hidden", ->
+		resetForm("linpack")
 
 	# BUTTONS
 
@@ -75,7 +81,7 @@ $(document).ready ->
 				200:(data) -> # SUCCESSFUL LOGOUT
 					$(location).attr("href","/ingresar") #REDIRECT
 
-				401:(xhr) ->  # user and password not found
+				401:(xhr) -> # user and password not found
 					data= JSON.parse(xhr.responseText)
 					alert(data.message)
 		true
@@ -109,13 +115,14 @@ $(document).ready ->
 						this.reset()
 					button.button("reset")
 					success = true
-				400:(xhr) ->  # INVALID PARAMETERS
+				400:(xhr) -> # INVALID PARAMETERS
 					setErrors(JSON.parse(xhr.responseText), app)
 					button.button("reset")
 
-				401:(xhr) ->  # NOT AUTHENTICATED
+				401:(xhr) -> # NOT AUTHENTICATED
 					data= JSON.parse(xhr.responseText)
-				500:(xhr) ->  # INTERNAL ERROR
+					notLogin()
+				500:(xhr) -> # INTERNAL ERROR
 		success
 
 	# FORM SYSTEM
@@ -144,13 +151,14 @@ $(document).ready ->
 						this.reset()
 					$("#input-center").val(input_center)
 					button.button("reset")
-				400:(xhr) ->  # invalid parameters
+				400:(xhr) -> # invalid parameters
 					setErrors(JSON.parse(xhr.responseText), app)
 					button.button("reset")
 
-				401:(xhr) ->  # not authenticated
+				401:(xhr) -> # not authenticated
 					data= JSON.parse(xhr.responseText)
-				500:(xhr) ->  # internal error
+					notLogin()
+				500:(xhr) -> # internal error
 		false
 
 	# FORM COMPONENTS
@@ -180,28 +188,44 @@ $(document).ready ->
 					$("#input-system").val(input_system)
 					button.button("reset")
 
-				400: (xhr) ->  # invalid parameters
+				400: (xhr) -> # invalid parameters
 					setErrors(JSON.parse(xhr.responseText), app)
 					button.button("reset")
 
-				401: (xhr) ->  # not authenticated
+				401: (xhr) -> # not authenticated
 					data= JSON.parse(xhr.responseText)
-				500: (xhr) ->  # internal error
+					notLogin()
+				500: (xhr) -> # internal error
 		false
 
-	# FORM LINPACK
+	# LINPACK
 
 	$("#button-save-linpack").click ->
+		app = "linpack"
+		button = $(this)
+		button.button("loading")
+		form = $("#form-#{app}")
+		resetErrors(form)
+
 		$.ajax
 			data:$("#form-linpack").serialize()
 			url: $("#form-linpack").attr("action")
 			type:$("#form-linpack").attr("method")
 			statusCode:
-				200:(data) -> # cluster created successful
+				200:(data) ->
+					$("#button-add-linpack").hide()
+					$("#button-edit-linpack").show()
+					$("#tbody-linpack").append(linpackTR(data.data))
+					button.button("reset")
+					$("#modal-form-linpack").modal("hide")
+
 				400:(xhr) ->  # invalid parameters
+					setErrors(JSON.parse(xhr.responseText), app)
+					button.button("reset")
+
+				401:(xhr) ->  # NOT AUTHENTICATED
 					data= JSON.parse(xhr.responseText)
-				401:(xhr) ->  # not authenticated
-					data= JSON.parse(xhr.responseText)
+					notLogin()
 				500:(xhr) -> # internal error
 		false
 
@@ -225,6 +249,9 @@ $(document).ready ->
 					$("#centers").hide()
 					$("#systems").show()
 					$("#input-center").val(center)
+				401:(xhr) -> # NOT AUTHENTICATED
+					data= JSON.parse(xhr.responseText)
+					notLogin()
 				404: (xhr) ->
 				500: (xhr) ->
 		false
@@ -253,9 +280,18 @@ $(document).ready ->
 								clickComponent($(this))
 						$("#tbody-components").append(tr)
 
+					if data.linpack
+						$("#button-add-linpack").hide()
+						$("#button-edit-linpack").show()
+						$("#tbody-linpack").append(linpackTR(data.linpack))
+
 					$("#systems").hide()
 					$("#components").show()
-					$("#input-system").val(system)
+					$("#input-system-linpack").val(system)
+					$("#input-system-component").val(system)
+				401:(xhr) -> # NOT AUTHENTICATED
+					data= JSON.parse(xhr.responseText)
+					notLogin()
 				404: (xhr)->
 				500: (xhr)->
 		false
@@ -283,11 +319,18 @@ $(document).ready ->
 		$("#centers").show()
 		$("#tbody-systems").html("")
 		$("#tbody-components").html("")
+		$("#tbody-linpack").html("")
+		$("#button-add-linpack").show()
+		$("#button-edit-linpack").hide()
+
 
 	$("#back-systems-components").click ->
 		$("#components").hide()
 		$("#systems").show()
 		$("#tbody-components").html("")
+		$("#tbody-linpack").html("")
+		$("#button-add-linpack").show()
+		$("#button-edit-linpack").hide()
 
 
 	actionsDIV = ->
@@ -360,5 +403,16 @@ $(document).ready ->
 			</td>
 			<td>#{data.processor_name}</td>
 			<td>#{actionsDIV()}</td>
+		</tr>
+		"""
+
+	linpackTR = (data) ->
+		"""
+		<tr>
+			<td>#{data.benchmark_date}</td>
+			<td>#{data.rmax}</td>
+			<td>#{data.rpeak}</td>
+			<td>#{data.nmax}</td>
+			<td>#{data.nhalf}</td>
 		</tr>
 		"""

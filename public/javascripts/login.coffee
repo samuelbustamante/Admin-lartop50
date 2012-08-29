@@ -1,40 +1,29 @@
 $(document).ready ->
 
-	#
+	# APPS
+
+	apps = [
+		"login"
+		"register"
+		"activate"
+	]
+
 	# BUTTONS
-	#
 
-	$("#form-login").find("button").button()
+	for app in apps
+		# BUTTONS
+		$("#form-#{app}").find("button").button()
+		# OPENS
+		$(".open-#{app}").click ->
+			open = $(this).attr("data-open")
+			$(open).show()
+			close = $(this).attr("data-close")
+			$(close).hide()
 
-	$("#form-register").find("button").button()
-
-	$("#form-activate").find("button").button()
-
-	#
-	# OPENS
-	#
-
-	$(".open-login").click ->
-		id= $(this).attr("now")
-		$(id).hide()
-		$("#login").show()
-
-	$(".open-register").click ->
-		id= $(this).attr("now")
-		$(id).hide()
-		$("#register").show()
-
-	$(".open-activate").click ->
-		id= $(this).attr("now")
-		$(id).hide()
-		$("#activate").show()
-
-	#
 	# FORM LOGIN
-	#
 
 	$("#form-login").submit ->
-		$(this).find('button').button('loading')
+		$(this).find("button").button("loading")
 
 		$.ajax
 			data:$("#form-login").serialize()
@@ -54,16 +43,16 @@ $(document).ready ->
 						$("#ctrl-login-#{error.param}").addClass("warning")
 
 					#RESET BUTTON
-					$("#form-login").find('button').button("reset")
+					$("#form-login").find("button").button("reset")
 
 				404:(xhr) ->  # user and password not found
 					data= JSON.parse(xhr.responseText)
 					#RESET BUTTON
-					$("#form-login").find('button').button("reset")
+					$("#form-login").find("button").button("reset")
 
 				500:(xhr) ->  # internal error
 					#RESET BUTTON
-					$("#form-login").find('button').button("reset")
+					$("#form-login").find("button").button("reset")
 
 		false
 
@@ -85,18 +74,18 @@ $(document).ready ->
 					$(".opens").hide()
 					$("#activate").show()
 					$("#activate").find(".code-200").show()
-					$("#form-register").find('button').button("reset")
+					$("#form-register").find("button").button("reset")
 				400:(xhr) -> # invalid parameters
 					data= JSON.parse(xhr.responseText)
 					$("#register").find(".code-400").show()
 					for error in data.errors
 						$("#ctrl-register-#{error.param}").addClass("warning")
-					$("#form-register").find('button').button("reset")
+					$("#form-register").find("button").button("reset")
 				410:(xhr) ->  # email is already in use
 					data= JSON.parse(xhr.responseText)
-					$("#form-register").find('button').button("reset")
+					$("#form-register").find("button").button("reset")
 				500:(xhr) -> # internal error
-					$("#form-register").find('button').button("reset")
+					$("#form-register").find("button").button("reset")
 
 		false
 
@@ -118,7 +107,7 @@ $(document).ready ->
 					$("#login").show()
 					$("#login").find(".opens").hide()
 					$("#login").find(".code-200").show()
-					$("#form-activate").find('button').button("reset")
+					$("#form-activate").find("button").button("reset")
 				400:(xhr) ->  # invalid key
 					data= JSON.parse(xhr.responseText)
 					$("#activate").find(".code-400").show()
@@ -126,11 +115,11 @@ $(document).ready ->
 						this.reset()
 					for error in data.errors
 						$("#ctrl-activate-#{error.param}").addClass("warning")
-					$("#form-activate").find('button').button("reset")
+					$("#form-activate").find("button").button("reset")
 				404:(xhr) ->  # key not found
 					data= JSON.parse(xhr.responseText)
-					$("#form-activate").find('button').button("reset")
+					$("#form-activate").find("button").button("reset")
 				500:(xhr) ->  # internal error
-					$("#form-activate").find('button').button("reset")
+					$("#form-activate").find("button").button("reset")
 
 		false

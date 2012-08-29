@@ -1,66 +1,62 @@
-#modal-form-linpack.modal.fade(style='display: none;')
-  .modal-header
-    button.close(data-dismiss='modal') x
-    h3 Ingresar Linpack
-  .modal-body
-    form#form-linpack.form-horizontal(method='POST', action='/linpacks')
-      fieldset
-        input(type='text', name='cluster', style='display: none;')
-        .control-group
-          label.control-label(for='title') Título
-          .controls
-            input(type='text', placeholder='Ingrese el título', name='title')
-        .control-group
-          label.control-label(for='benchmark_date') Fecha de benchmark
-          .controls
-            input(type='text', placeholder='Ingrese la fecha de benchmark', name='benchmark_date')
-        .control-group
-          label.control-label(for='cores') Número de cores
-          .controls
-            input(type='text', placeholder='Ingrese el número de cores usado', name='cores')
-        .control-group
-          label.control-label(for='gpu_cores') Número de GPU cores
-          .controls
-            input(type='text', placeholder='Ingrese el número de GPU Cores usados', name='gpu_cores')
-        .control-group
-          label.control-label(for='rmax') Rmax
-          .controls
-            input(type='text', placeholder='Ingrese su Rmax', name='rmax')
-        .control-group
-          label.control-label(for='description') Rpeak
-          .controls
-            input(type='text', placeholder='Ingrese su Rpeak', name='rpeak')
-        .control-group
-          label.control-label(for='nmax') Nmax
-          .controls
-            input(type='text', placeholder='Ingrese su Nmax', name='nmax')
-        .control-group
-          label.control-label(for='nhalf') Nhalf
-          .controls
-            input(type='text', placeholder='Ingrse su Nhalf', name='nhalf')
-        .control-group
-          label.control-label(for='compiler_name') Nombre del copilador
-          .controls
-            input(type='text', placeholder='Ingrse el compilado usado', name='compiler_name')
-        .control-group
-          label.control-label(for='compiler_options') Opciones del compilador
-          .controls
-            input(type='text', placeholder='Ingrese las opciones usadas', name='compiler_options')
-        .control-group
-          label.control-label(for='math_library') Librería Math
-          .controls
-            input(type='text', placeholder='Ingrese la librería math usada', name='math_library')
-        .control-group
-          label.control-label(for='mpi_library') Librería MPI
-          .controls
-            input(type='text', placeholder='Ingrese la librería mpi usada', name='mpi_library')
-        .control-group
-          label.control-label(for='hpl_input') HPL de entrada
-          .controls
-            textarea(placeholder='Ingrese el hpl de entrada', name='hpl_input')
-        .control-group
-          label.control-label(for='hpl_output') HPL de salida
-          .controls
-            textarea(placeholder='Ingrese el hpl de salida', name='hpl_output')
-  .modal-footer
-    button#button-save-linpack.btn.btn-primary.save Ingresar
+#modal-form-linpack.modal.fade(style="display: none;")
+	.modal-header
+		button.close(data-dismiss="modal") x
+		h3 Ingresar Linpack
+	.modal-body
+		form#form-linpack.form-horizontal(method="POST", action="/api/submissions/linpacks")
+			fieldset
+				input#input-system-linpack.hide(type="text", name="system")
+				.control-group#ctrl-linpack-benchmark_date
+					label.control-label(for="benchmark_date") Fecha de benchmark
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese la fecha de benchmark", name="benchmark_date")
+				.control-group#ctrl-linpack-cores
+					label.control-label(for="cores") Número de cores
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese el número de cores usado", name="cores")
+				.control-group#ctrl-linpack-gpu_cores
+					label.control-label(for="gpu_cores") Número de GPU cores
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese el número de GPU Cores usados", name="gpu_cores")
+				.control-group#ctrl-linpack-rmax
+					label.control-label(for="rmax") Rmax
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese su Rmax", name="rmax")
+				.control-group#ctrl-linpack-description
+					label.control-label(for="description") Rpeak
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese su Rpeak", name="rpeak")
+				.control-group#ctrl-linpack-nmax
+					label.control-label(for="nmax") Nmax
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese su Nmax", name="nmax")
+				.control-group#ctrl-linpack-nhalf
+					label.control-label(for="nhalf") Nhalf
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrse su Nhalf", name="nhalf")
+				.control-group#ctrl-linpack-compiler_name
+					label.control-label(for="compiler_name") Nombre del copilador
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrse el compilado usado", name="compiler_name")
+				.control-group#ctrl-linpack-compiler_options
+					label.control-label(for="compiler_options") Opciones del compilador
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese las opciones usadas", name="compiler_options")
+				.control-group#ctrl-linpack-math_library
+					label.control-label(for="math_library") Librería Math
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese la librería math usada", name="math_library")
+				.control-group#ctrl-linpack-mpi_library
+					label.control-label(for="mpi_library") Librería MPI
+					.controls
+						input.input-xlarge(type="text", placeholder="Ingrese la librería mpi usada", name="mpi_library")
+				.control-group#ctrl-linpack-hpl_input
+					label.control-label(for="hpl_input") HPL de entrada
+					.controls
+						textarea.input-xlarge(placeholder="Ingrese el hpl de entrada", name="hpl_input", rows="8")
+				.control-group#ctrl-linpack-hpl_output
+					label.control-label(for="hpl_output") HPL de salida
+					.controls
+						textarea.input-xlarge(placeholder="Ingrese el hpl de salida", name="hpl_output", rows="8")
+	.modal-footer
+		button#button-save-linpack.btn.btn-primary.save Ingresar

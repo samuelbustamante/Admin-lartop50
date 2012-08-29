@@ -2,27 +2,31 @@
 (function() {
 
   $(document).ready(function() {
-    $("#form-login").find("button").button();
-    $("#form-register").find("button").button();
-    $("#form-activate").find("button").button();
-    $(".open-login").click(function() {
-      var id;
-      id = $(this).attr("now");
-      $(id).hide();
-      return $("#login").show();
-    });
-    $(".open-register").click(function() {
-      var id;
-      id = $(this).attr("now");
-      $(id).hide();
-      return $("#register").show();
-    });
-    $(".open-activate").click(function() {
-      var id;
-      id = $(this).attr("now");
-      $(id).hide();
-      return $("#activate").show();
-    });
+    var app, apps, _i, _len;
+    apps = ["login", "register", "activate"];
+    for (_i = 0, _len = apps.length; _i < _len; _i++) {
+      app = apps[_i];
+      $("#form-" + app).find("button").button();
+      $(".open-" + app).click(function() {
+        var close, open;
+        open = $(this).attr("data-open");
+        $(open).show();
+        close = $(this).attr("data-close");
+        return $(close).hide();
+      });
+    }
+    /*
+    	$(".open-register").click ->
+    		id= $(this).attr("now")
+    		$(id).hide()
+    		$("#register").show()
+    
+    	$(".open-activate").click ->
+    		id= $(this).attr("now")
+    		$(id).hide()
+    		$("#activate").show()
+    */
+
     $("#form-login").submit(function() {
       $(this).find('button').button('loading');
       $.ajax({
@@ -34,12 +38,12 @@
             return $(location).attr("href", "/");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref;
+            var data, error, _j, _len1, _ref;
             data = JSON.parse(xhr.responseText);
             $("#login").find(".code-400").show();
             _ref = data.errors;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              error = _ref[_i];
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              error = _ref[_j];
               $("#ctrl-login-" + error.param).addClass("warning");
             }
             return $("#form-login").find('button').button("reset");
@@ -71,12 +75,12 @@
             return $("#form-register").find('button').button("reset");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref;
+            var data, error, _j, _len1, _ref;
             data = JSON.parse(xhr.responseText);
             $("#register").find(".code-400").show();
             _ref = data.errors;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              error = _ref[_i];
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              error = _ref[_j];
               $("#ctrl-register-" + error.param).addClass("warning");
             }
             return $("#form-register").find('button').button("reset");
@@ -108,15 +112,15 @@
             return $("#form-activate").find('button').button("reset");
           },
           400: function(xhr) {
-            var data, error, _i, _len, _ref;
+            var data, error, _j, _len1, _ref;
             data = JSON.parse(xhr.responseText);
             $("#activate").find(".code-400").show();
             $("#form-activate").each(function() {
               return this.reset();
             });
             _ref = data.errors;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              error = _ref[_i];
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              error = _ref[_j];
               $("#ctrl-activate-" + error.param).addClass("warning");
             }
             return $("#form-activate").find('button').button("reset");

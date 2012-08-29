@@ -1,14 +1,15 @@
 .container.hide#components
+	// COMPONENTS
 	.page-header
 		h3
-			a#back-centers-components(href="javascript:;") Mis centros
-			span  / 
+			a#back-centers-components(href="javascript:;") Mis centros&nbsp;
+			span / 
 			a#back-systems-components(href="javascript:;")
 			span#system-now 
 
 			button#button-new-component.btn.btn-primary.pull-right
 				i.icon-plus.icon-white
-				span  Agregar componente
+				span &nbsp;Agregar componente
 
 	table#table-components.table.table-bordered
 		thead
@@ -20,3 +21,26 @@
 				th Procesador
 				th Acciones
 		tbody#tbody-components
+
+	// LINPACK
+	.page-header
+		h3
+			| LINPACK
+			button#button-add-linpack.btn.btn-primary.pull-right
+				i.icon-plus.icon-white
+				span &nbsp;Agregar linpack
+
+			button#button-edit-linpack.btn.btn-primary.pull-right.hide
+				i.icon-plus.icon-white
+				span &nbsp;Editar linpack
+
+
+	table#table-linpack.table.table-bordered
+		thead
+			tr
+				th Fecha de benchmark
+				th Rmax
+				th Rpeak
+				th Nmax
+				th Nhalf
+		tbody#tbody-linpack

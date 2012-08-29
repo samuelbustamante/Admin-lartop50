@@ -2,7 +2,7 @@
 (function() {
 
   $(document).ready(function() {
-    var actionsDIV, app, apps, centerTR, clickCenter, clickComponent, clickSystem, componentTR, resetErrors, resetForm, setErrors, systemTR, _i, _len;
+    var actionsDIV, app, apps, centerTR, clickCenter, clickComponent, clickSystem, componentTR, linpackTR, notLogin, resetErrors, resetForm, setErrors, systemTR, _i, _len;
     apps = ["center", "system", "component"];
     for (_i = 0, _len = apps.length; _i < _len; _i++) {
       app = apps[_i];
@@ -16,7 +16,7 @@
     $("#button-new-system").click(function() {
       return $("#modal-form-system").modal("show");
     });
-    $("#button-new-linpack").click(function() {
+    $("#button-add-linpack").click(function() {
       return $("#modal-form-linpack").modal("show");
     });
     $("#button-new-component").click(function() {
@@ -53,6 +53,9 @@
       }
       return _results;
     };
+    notLogin = function() {
+      return $(location).attr("href", "/ingresar");
+    };
     $("#modal-form-center").on("hidden", function() {
       return resetForm("center");
     });
@@ -61,6 +64,9 @@
     });
     $("#modal-form-component").on("hidden", function() {
       return resetForm("component");
+    });
+    $("#modal-form-linpack").on("hidden", function() {
+      return resetForm("linpack");
     });
     $("#button-save-center").button();
     $("#logout").click(function() {
@@ -118,7 +124,8 @@
           },
           401: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return notLogin();
           },
           500: function(xhr) {}
         }
@@ -161,7 +168,8 @@
           },
           401: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return notLogin();
           },
           500: function(xhr) {}
         }
@@ -204,7 +212,8 @@
           },
           401: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return notLogin();
           },
           500: function(xhr) {}
         }
@@ -212,19 +221,32 @@
       return false;
     });
     $("#button-save-linpack").click(function() {
+      var button, form;
+      app = "linpack";
+      button = $(this);
+      button.button("loading");
+      form = $("#form-" + app);
+      resetErrors(form);
       $.ajax({
         data: $("#form-linpack").serialize(),
         url: $("#form-linpack").attr("action"),
         type: $("#form-linpack").attr("method"),
         statusCode: {
-          200: function(data) {},
+          200: function(data) {
+            $("#button-add-linpack").hide();
+            $("#button-edit-linpack").show();
+            $("#tbody-linpack").append(linpackTR(data.data));
+            button.button("reset");
+            return $("#modal-form-linpack").modal("hide");
+          },
           400: function(xhr) {
-            var data;
-            return data = JSON.parse(xhr.responseText);
+            setErrors(JSON.parse(xhr.responseText), app);
+            return button.button("reset");
           },
           401: function(xhr) {
             var data;
-            return data = JSON.parse(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+            return notLogin();
           },
           500: function(xhr) {}
         }
@@ -256,6 +278,11 @@
             $("#centers").hide();
             $("#systems").show();
             return $("#input-center").val(center);
+          },
+          401: function(xhr) {
+            var data;
+            data = JSON.parse(xhr.responseText);
+            return notLogin();
           },
           404: function(xhr) {},
           500: function(xhr) {}
@@ -290,9 +317,20 @@
               });
               $("#tbody-components").append(tr);
             }
+            if (data.linpack) {
+              $("#button-add-linpack").hide();
+              $("#button-edit-linpack").show();
+              $("#tbody-linpack").append(linpackTR(data.linpack));
+            }
             $("#systems").hide();
             $("#components").show();
-            return $("#input-system").val(system);
+            $("#input-system-linpack").val(system);
+            return $("#input-system-component").val(system);
+          },
+          401: function(xhr) {
+            var data;
+            data = JSON.parse(xhr.responseText);
+            return notLogin();
           },
           404: function(xhr) {},
           500: function(xhr) {}
@@ -321,12 +359,18 @@
       $("#components").hide();
       $("#centers").show();
       $("#tbody-systems").html("");
-      return $("#tbody-components").html("");
+      $("#tbody-components").html("");
+      $("#tbody-linpack").html("");
+      $("#button-add-linpack").show();
+      return $("#button-edit-linpack").hide();
     });
     $("#back-systems-components").click(function() {
       $("#components").hide();
       $("#systems").show();
-      return $("#tbody-components").html("");
+      $("#tbody-components").html("");
+      $("#tbody-linpack").html("");
+      $("#button-add-linpack").show();
+      return $("#button-edit-linpack").hide();
     });
     actionsDIV = function() {
       return "<div class=\"btn-group\">\n	<button class=\"btn btn-mini dropdown-toggle\", data-toggle=\"dropdown\">\n	<span class=\"caret\">\n		<ul class=\"dropdown-menu\">\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-pencil\">\n						<span> Editar</span>\n					</i>\n				</a>\n			</li>\n			<li>\n				<a href=\"#\">\n					<i class=\"icon-remove\">\n						<span> Eliminar</span>\n					</i>\n				</a>\n			</li>\n		</ul>\n	</span>\n</div>";
@@ -337,8 +381,11 @@
     systemTR = function(data) {
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"system\" system-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.status + "</span>\n	</td>\n	<td>" + data.area + "</td>\n	<td>" + data.vendor + "</td>\n	<td>" + data.installation + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
     };
-    return componentTR = function(data) {
+    componentTR = function(data) {
       return "<tr>\n	<td>\n		<a href=\"javascript:;\" class=\"component\" component-id=\"" + data.id + "\">" + data.name + "</a>\n	</td>\n	<td>" + data.model + "</td>\n	<td>" + data.vendor + "</td>\n	<td>\n		<span class=\"badge badge-info\">" + data.nodes + "</span>\n	</td>\n	<td>" + data.processor_name + "</td>\n	<td>" + (actionsDIV()) + "</td>\n</tr>";
+    };
+    return linpackTR = function(data) {
+      return "<tr>\n	<td>" + data.benchmark_date + "</td>\n	<td>" + data.rmax + "</td>\n	<td>" + data.rpeak + "</td>\n	<td>" + data.nmax + "</td>\n	<td>" + data.nhalf + "</td>\n</tr>";
     };
   });
 

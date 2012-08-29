@@ -1,61 +1,61 @@
 !!! 5
 html(lang='es')
-  head
-    meta(charset='utf-8')
-    title Lartop50 - Tus centros
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='description', content='')
-    meta(name='author', content='')
-    link(href='/stylesheets/bootstrap.css', rel='stylesheet')
-    link(href='/stylesheets/default.css', rel='stylesheet')
-    link(href='http://fonts.googleapis.com/css?family=Electrolize', rel='stylesheet', type='text/css')
-    style
-    //if lt IE 9
-      script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
-  body
-    // NAVBAR
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.brand(href='/', style="color:#EEE")
-            img(src="http://3bd45b82b0c657f339e9-634522a66d599bb7b55f464d59446966.r46.cf1.rackcdn.com/logo-nav.png")
-            span  Lartop
-            span(style="color: #FDCA01") 50
-          .nav-collapse
-            ul.nav.pull-right
-              li.dropdown
-                a.dropdown-toggle(href="javascript:;", data-toggle="dropdown") #{profile.name} 
-                  b.caret
-                ul.dropdown-menu
-                  li
-                    a#logout(href="javascript:;") Salir
+	head
+		meta(charset='utf-8')
+		title Lartop50 - Tus centros
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(name='description', content='')
+		meta(name='author', content='')
+		link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+		link(href='/stylesheets/default.css', rel='stylesheet')
+		link(href='http://fonts.googleapis.com/css?family=Electrolize', rel='stylesheet', type='text/css')
+		style
+		//if lt IE 9
+			script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+	body
+		// NAVBAR
+		.navbar.navbar-fixed-top
+			.navbar-inner
+				.container
+					a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.brand(href='/', style="color:#EEE")
+						img(src="http://3bd45b82b0c657f339e9-634522a66d599bb7b55f464d59446966.r46.cf1.rackcdn.com/logo-nav.png")
+						span	Lartop
+						span(style="color: #FDCA01") 50
+					.nav-collapse
+						ul.nav.pull-right
+							li.dropdown
+								a.dropdown-toggle(href="javascript:;", data-toggle="dropdown") #{profile.name} 
+									b.caret
+								ul.dropdown-menu
+									li
+										a#logout(href="javascript:;") Salir
 
-    #panel.container
-      // CENTERS
-      include includes/centers
-      // SYSTEMS
-      include includes/systems
-      // COMPONENTS
-      include includes/components
-      // LINPACK
-      include includes/linpack
+		#panel.container
+			// CENTERS
+			include includes/centers
+			// SYSTEMS
+			include includes/systems
+			// COMPONENTS
+			include includes/components
+			// LINPACK
+			include includes/linpack
 
-    #modals
-      // MODAL FORM CENTER
-      include includes/modal-form-center
-      // MODAL FORM SYSTEM
-      include includes/modal-form-system
-      // MODAL FORM COMPONENT 
-      include includes/modal-form-component
-      // MODAL FORM LINPACKS 
-      include includes/modal-form-linpack
-      // MODAL COMPONENT
-      include includes/modal-component
+		#modals
+			// MODAL FORM CENTER
+			include includes/modal-form-center
+			// MODAL FORM SYSTEM
+			include includes/modal-form-system
+			// MODAL FORM COMPONENT 
+			include includes/modal-form-component
+			// MODAL FORM LINPACKS 
+			include includes/modal-form-linpack
+			// MODAL COMPONENT
+			include includes/modal-component
 
-    script(src='/javascripts/jquery.js')
-    script(src='/javascripts/bootstrap.min.js')
-    script(src='/javascripts/panel.js')
+		script(src='/javascripts/jquery.js')
+		script(src='/javascripts/bootstrap.min.js')
+		script(src='/javascripts/panel.js')

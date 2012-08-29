@@ -30,8 +30,9 @@ html(lang='es')
 
     .container
       .row(style="margin-top:100px")
-        // .span7(style="height:300px;") REVIEW !!
         .span6.offset3
+
+          // LOGIN
           #login.well
             .page-header
               h3 Iniciar sesión
@@ -52,11 +53,13 @@ html(lang='es')
               .control-group#ctrl-login-password
                 input.input-xlarge(type="password", name="password", placeholder="Contraseña")
               button.btn.btn-primary.btn-large.input-xlarge(type="submit", data-loading-text="Iniciando sesión ...", autocomplete="off") Iniciar sesión
+            // OPENS
             p.opens
-              a(href="#!registrarse", style="margin-right: 10px", now="#login").open-register Registrarse
+              a(href="#!registrarse", style="margin-right: 10px", data-open="#register", data-close="#login").open-register Registrarse
               |
-              a(href="javascript:;", style="margin-left: 10px", now="#login").open-activate Activar cuenta
+              a(href="javascript:;", style="margin-left: 10px", data-open="#activate", data-close="#login").open-activate Activar cuenta
 
+          // REGISTER
           #register.well.hide
             .page-header
               h3 Registrarse
@@ -81,11 +84,13 @@ html(lang='es')
                 != recaptcha_form
 
               button.btn.btn-success.btn-large.input-xlarge(type="submit", data-loading-text="Registrandote ...", autocomplete="off") Registrarse
+            // OPENS
             p.opens
-              a(href="javascript:;", style="margin-right: 10px", now="#register").open-login Iniciar sesión
+              a(href="javascript:;", style="margin-right: 10px", data-open="#login", data-close="#register").open-login Iniciar sesión
               |
-              a(href="javascript:;", style="margin-left: 10px", now="#register").open-activate Activar cuenta
+              a(href="javascript:;", style="margin-left: 10px", data-open="#activate", data-close="#register").open-activate Activar cuenta
 
+          // ACTIVATE
           #activate.well.hide
             .page-header
               h3 Activar cuenta
@@ -104,10 +109,11 @@ html(lang='es')
               .control-group#ctrl-activate-key
                 input.input-xlarge(type="text", name="key", placeholder="Código de activación")
               button.btn.btn-info.btn-large.input-xlarge(type="submit", data-loading-text="Activando cuenta ...", autocomplete="off") Activar cuenta
+            // OPENS
             p.opens
-              a(href="javascript:;", style="margin-right: 10px", now="#activate").open-register Registrarse
+              a(href="javascript:;", style="margin-right: 10px", data-open="#register", data-close="#activate").open-register Registrarse
               |
-              a(href="javascript:;", style="margin-left: 10px", now="#activate").open-login Iniciar sesión
+              a(href="javascript:;", style="margin-left: 10px", data-open="#login", data-close="#activate").open-login Iniciar sesión
 
 
     script(src='/javascripts/jquery.js')
